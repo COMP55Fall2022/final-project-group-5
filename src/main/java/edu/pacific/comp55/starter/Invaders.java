@@ -11,7 +11,9 @@ public class Invaders {
 		this.x = x;
 		this.y = y;
 		
+		//this should get img for the enemiesInvaders = "gets image for the enemy"
 		bomb = new Bomb(x, y);
+		//this should get img for the bomb
 		
 	}
 }
