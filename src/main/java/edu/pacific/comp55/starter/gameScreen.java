@@ -8,8 +8,11 @@ import acm.graphics.*;
 
 public class gameScreen extends GraphicsProgram{
 	
+	private static final int PROGRAM_HEIGHT = 500;
+	private static final int PROGRAM_WIDTH = 500;
+
 	public void init() {
-		setSize(500, 500);
+		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
 	}
 
 	public void run() {
