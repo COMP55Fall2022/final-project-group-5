@@ -4,4 +4,13 @@ public class Shot {
 	private void removeShot() {
 		
 	}
+	
+	public Shot shot(int x, int y) {
+		
+		return null;
+	}
+	
+	public void fireShot() {
+		
+	}
 }
