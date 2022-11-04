@@ -31,7 +31,11 @@ public class gameScreen extends GraphicsProgram{
 		GLabel title = new GLabel("INVADERZ", 150, 150);
 		title.setFont("Arial-Bold-40");
 		title.setColor(Color.WHITE);
+		GLabel startGame = new GLabel("Start Game", 185, 215);
+		startGame.setFont("Arial-Bold-22");
+		startGame.setColor(Color.WHITE);
 		add(title);
+		add(startGame);
 	}
 	
 	
