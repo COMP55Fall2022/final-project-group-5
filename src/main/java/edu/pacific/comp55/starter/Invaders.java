@@ -23,7 +23,16 @@ public class Invaders {
 	public Bomb getBomb() {
 		return bomb;
 	}
-	
+	public class Bomb extends Invaders {
+
+		public Bomb(int x, int y) {
+			 initBomb(x , y);
+		}
+		private void initBomb(int x, int y) {
+			
+		}
+	}
+		
 }
 
 
