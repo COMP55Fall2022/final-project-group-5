@@ -19,7 +19,10 @@ public class gameScreen extends GraphicsProgram{
 
 	public void run() {
 		// all draws
-		drawMainMenu();
+		//drawMainMenu();
+		GImage background = new GImage("media/spaceBackground.jpg");
+		background.setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
+		add(background);
 		addKeyListeners();
 		addMouseListeners();
 	}
