@@ -19,16 +19,19 @@ public class gameScreen extends GraphicsProgram{
 
 	public void run() {
 		// all draws
-		//drawMainMenu();
 		GImage background = new GImage("media/spaceBackground.jpg");
 		background.setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
 		add(background);
+		drawMainMenu();
 		addKeyListeners();
 		addMouseListeners();
 	}
 	
 	private void drawMainMenu() {
-		
+		GLabel title = new GLabel("INVADERZ", 150, 150);
+		title.setFont("Arial-Bold-40");
+		title.setColor(Color.WHITE);
+		add(title);
 	}
 	
 	
