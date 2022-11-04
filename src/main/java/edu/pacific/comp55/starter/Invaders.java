@@ -15,6 +15,16 @@ public class Invaders {
 		bomb = new Bomb(x, y);
 		//this should get img for the bomb
 		
+		// setImage(ii.getImage());
 	}
+	public void act(int direction) {
+		
+	}
+	public Bomb getBomb() {
+		return bomb;
+	}
+	
 }
+
+
 
