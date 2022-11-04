@@ -23,14 +23,22 @@ public class Invaders {
 	public Bomb getBomb() {
 		return bomb;
 	}
-	public class Bomb extends Invaders {
+	public class Bomb {
 
+		private int x;
+		private int y;
 		public Bomb(int x, int y) {
 			 initBomb(x , y);
 		}
 		private void initBomb(int x, int y) {
+			this.x = x;
+			this.y = y;
+			
+		//var imgBomb = ""
+		//var II = new "";
 			
 		}
+		
 	}
 		
 }
