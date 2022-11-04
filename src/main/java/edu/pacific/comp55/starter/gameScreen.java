@@ -34,8 +34,12 @@ public class gameScreen extends GraphicsProgram{
 		GLabel startGame = new GLabel("Start Game", 185, 215);
 		startGame.setFont("Arial-Bold-22");
 		startGame.setColor(Color.WHITE);
+		GLabel scoreboard = new GLabel("Scoreboard", 185, 268);
+		scoreboard.setFont("Arial-Bold-22");
+		scoreboard.setColor(Color.WHITE);
 		add(title);
 		add(startGame);
+		add(scoreboard);
 	}
 	
 	
