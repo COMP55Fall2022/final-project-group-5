@@ -38,8 +38,16 @@ public class gameScreen extends GraphicsProgram{
 		scoreboard.setFont("Arial-Bold-22");
 		scoreboard.setColor(Color.WHITE);
 		GImage movement = new GImage("media/movementCTRL.png");
-		movement.setLocation(280, 380);
-		movement.setSize(50, 50);
+		movement.setLocation(265, 380);
+		movement.setSize(65, 50);
+		GImage fire = new GImage("media/SpaceBar.png");
+		fire.setLocation(160, 380);
+		fire.setSize(75, 50);
+		GLabel controls = new GLabel("Controls", 207, 355);
+		controls.setFont("Arial-Bold-18");
+		controls.setColor(Color.WHITE);
+		add(controls);
+		add(fire);
 		add(movement);
 		add(title);
 		add(startGame);
