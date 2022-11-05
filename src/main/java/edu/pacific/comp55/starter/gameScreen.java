@@ -34,4 +34,3 @@ public class gameScreen extends GraphicsProgram{
 		new gameScreen().start();
 	}
 }
-// todo
