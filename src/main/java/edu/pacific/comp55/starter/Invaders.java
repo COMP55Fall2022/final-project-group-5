@@ -1,5 +1,7 @@
 package edu.pacific.comp55.starter;
 
+import acm.graphics.GImage;
+
 public class Invaders {
 	private Bomb bomb;
 	private int x;
@@ -11,11 +13,8 @@ public class Invaders {
 		this.x = x;
 		this.y = y;
 		
-		//this should get img for the enemiesInvaders = "gets image for the enemy"
+		GImage invaders = new GImage("images/invaders.png");
 		bomb = new Bomb(x, y);
-		//this should get img for the bomb
-		
-		// setImage(ii.getImage());
 	}
 	public void act(int direction) {
 		
