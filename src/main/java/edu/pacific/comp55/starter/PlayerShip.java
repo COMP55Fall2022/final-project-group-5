@@ -3,6 +3,7 @@ import acm.graphics.*;
 import acm.program.*;
 import acm.util.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class PlayerShip  {
 	private Shot shot;
@@ -14,6 +15,14 @@ public class PlayerShip  {
 	}
 	
 	public void initPlayerShip() {
+		
+	}
+	
+	public void keyPressed(KeyEvent e) {
+		
+	}
+	
+	public void keyReleased(KeyEvent e) {
 		
 	}
 	
