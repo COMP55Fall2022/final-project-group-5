@@ -27,15 +27,23 @@ public class Invaders {
 
 		private int x;
 		private int y;
+		private boolean destroyed;
 		public Bomb(int x, int y) {
 			 initBomb(x , y);
 		}
 		private void initBomb(int x, int y) {
 			this.x = x;
 			this.y = y;
-			
+			Destroyed (true);
 		//var imgBomb = ""
 		//var II = new "";
+		//setImage(ii.getImage());	
+		}
+		private void Destroyed(boolean destroyed) {
+			this.destroyed = destroyed;
+			
+		}
+		public void Invader(boolean destroyed) {
 			
 		}
 		
