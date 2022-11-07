@@ -27,29 +27,32 @@ public class Invaders {
 
 		private int x;
 		private int y;
-		private boolean destroyed;
+		private boolean invaders;
 		public Bomb(int x, int y) {
 			 initBomb(x , y);
 		}
 		private void initBomb(int x, int y) {
 			this.x = x;
 			this.y = y;
-			Destroyed (true);
+			invaders(true);
 		//var imgBomb = ""
 		//var II = new "";
 		//setImage(ii.getImage());	
 		}
-		private void Destroyed(boolean destroyed) {
-			this.destroyed = destroyed;
+		public void invaders(boolean destroyed) {
+			this.invaders = destroyed;
+		}
+		public boolean ifDestroyed() {
+			return invaders;
 			
 		}
-		public void Invader(boolean destroyed) {
+		
+			
 			
 		}
 		
 	}
 		
-}
 
 
 
