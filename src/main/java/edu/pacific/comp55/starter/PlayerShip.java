@@ -7,11 +7,14 @@ import java.awt.*;
 public class PlayerShip  {
 	private Shot shot;
 	private int lives;
-	GImage shipImage = new GImage("SeekPng.com_space-ship-png_254127.png");
+	GObject player;
 	
-	public PlayerShip player(int x, int y) {
+	public PlayerShip () {
+		initPlayerShip();
+	}
+	
+	public void initPlayerShip() {
 		
-		return null;
 	}
 	
 	public void revive() { 

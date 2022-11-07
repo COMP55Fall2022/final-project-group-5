@@ -14,6 +14,6 @@ public class Shot {
 	}
 	
 	public void fireShot(int x, int y) {
-		GImage shipImage = new GImage("laserBullet.png");
+		GObject shot;
 	}
 }
