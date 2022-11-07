@@ -21,8 +21,13 @@ public class PlayerShip  {
 	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
+		
 		if (key == KeyEvent.VK_LEFT) {
 			k = -2;
+		}
+		
+		if (key == KeyEvent.VK_RIGHT) {
+			k = 2;
 		}
 	}
 	
