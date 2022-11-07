@@ -32,7 +32,15 @@ public class PlayerShip  {
 	}
 	
 	public void keyReleased(KeyEvent e) {
+		int key = e.getKeyCode();
 		
+		if (key == KeyEvent.VK_LEFT) {
+			k = 0;
+		}
+		
+		if (key == KeyEvent.VK_RIGHT) {
+			k = 0;
+		}
 	}
 	
 	public void revive() { 
