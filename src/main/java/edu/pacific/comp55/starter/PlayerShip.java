@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 public class PlayerShip  {
 	private Shot shot;
 	private int lives;
+	int k;
 	GObject player;
 	
 	public PlayerShip () {
@@ -19,7 +20,10 @@ public class PlayerShip  {
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		
+		int key = e.getKeyCode();
+		if (key == KeyEvent.VK_LEFT) {
+			k = -2;
+		}
 	}
 	
 	public void keyReleased(KeyEvent e) {
