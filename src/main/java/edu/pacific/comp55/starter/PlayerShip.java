@@ -10,6 +10,8 @@ public class PlayerShip  {
 	private int lives;
 	int k;
 	GObject player;
+	int START_X = 200;
+	int START_Y = 200;
 	
 	public PlayerShip () {
 		initPlayerShip();
