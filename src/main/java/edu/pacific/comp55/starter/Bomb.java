@@ -16,8 +16,8 @@ public class Bomb {
 	//var II = new "";
 	//setImage(ii.getImage());	
 	}
-	private void invaders(boolean b) {
-		
+	private void invaders(boolean destroyed) {
+		this.invaders = destroyed;
 	}
 		
 		
