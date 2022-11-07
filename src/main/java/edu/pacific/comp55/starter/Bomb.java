@@ -4,7 +4,7 @@ public class Bomb {
 
 	private int x;
 	private int y;
-	private boolean invaders;
+	private boolean destroyed;
 	public Bomb(int x, int y) {
 		 initBomb(x , y);
 	}
@@ -17,9 +17,11 @@ public class Bomb {
 	//setImage(ii.getImage());	
 	}
 	private void invaders(boolean destroyed) {
-		this.invaders = destroyed;
+		this.destroyed = destroyed;
 	}
-		
+		public boolean isDestroyed() {
+			return destroyed;
+		}
 		
 	}
 
