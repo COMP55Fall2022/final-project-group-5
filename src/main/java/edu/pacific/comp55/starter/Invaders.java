@@ -23,35 +23,7 @@ public class Invaders {
 	public Bomb getBomb() {
 		return bomb;
 	}
-	public class Bomb {
-
-		private int x;
-		private int y;
-		private boolean invaders;
-		public Bomb(int x, int y) {
-			 initBomb(x , y);
-		}
-		private void initBomb(int x, int y) {
-			this.x = x;
-			this.y = y;
-			invaders(true);
-		//var imgBomb = ""
-		//var II = new "";
-		//setImage(ii.getImage());	
-		}
-		public void invaders(boolean destroyed) {
-			this.invaders = destroyed;
-		}
-		public boolean ifDestroyed() {
-			return invaders;
-			
-		}
-		
-			
-			
-		}
-		
-	}
+}
 		
 
 
