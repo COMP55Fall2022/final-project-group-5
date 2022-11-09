@@ -13,8 +13,7 @@ public class gameScreen extends GraphicsProgram{
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
 	
-	private GRect start;
-	private GRect score;
+	private GRect start, score;
 	
 	public Scoreboard scoreboard;
 	
@@ -83,14 +82,23 @@ public class gameScreen extends GraphicsProgram{
 		
 	}
 	
+	private void drawGame() {
+		removeAll();
+		GImage background = new GImage("media/spaceBackground.jpg");
+		background.setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
+		add(background);
+		
+	}
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (getElementAt(e.getX(), e.getY()) == start) {
 			System.out.println("start");
+			drawGame();
 		}
 		else if (getElementAt(e.getX(), e.getY()) == score) {
 			System.out.println("scoreboard");
-			scoreboard.Draw();
+			//scoreboard.Draw();
 		}
 		else {
 			System.out.println("nothing");

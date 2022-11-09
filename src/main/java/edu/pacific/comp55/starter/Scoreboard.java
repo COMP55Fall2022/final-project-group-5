@@ -10,6 +10,8 @@ public class Scoreboard {
 	public void Draw() {
 		GLabel Title = new GLabel("INVADERZ", 150, 150);
 	}
+	
+	
 
 
 }
