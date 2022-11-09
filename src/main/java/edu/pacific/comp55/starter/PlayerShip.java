@@ -9,18 +9,30 @@ public class PlayerShip  {
 	private Shot shot;
 	private int lives;
 	int k;
-	GObject player;
+	int x;
+	int y;
 	int START_X = 200;
 	int START_Y = 200;
+	
+	private void setX(int x) {
+		this.x = x;
+	}
+	
+	private void setY(int y) {
+		this.y = y;
+	}
 	
 	public PlayerShip () {
 		initPlayerShip();
 	}
 	
 	public void initPlayerShip() {
-		
+		GObject playerShip = new GImage("images/playerShip.png");
+		setX(START_X);
+		setY(START_Y);
 	}
 	
+
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
@@ -58,6 +70,10 @@ public class PlayerShip  {
 	}
 	
 	public void damaged() { 
+		
+	}
+	
+	public static void main(String[] args) {
 		
 	}
 }
