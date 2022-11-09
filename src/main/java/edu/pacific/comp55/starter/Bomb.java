@@ -1,5 +1,9 @@
 package edu.pacific.comp55.starter;
 
+import java.awt.Color;
+
+import acm.graphics.GRect;
+
 public class Bomb {
 
 	private int x;
@@ -12,9 +16,9 @@ public class Bomb {
 		this.x = x;
 		this.y = y;
 		invaders(true);
-	//var imgBomb = ""
-	//var II = new "";
-	//setImage(ii.getImage());	
+		GRect bomb = new GRect(10, 20, 40, 40);
+		bomb.setColor(Color.GRAY);
+		
 	}
 	private void invaders(boolean destroyed) {
 		this.destroyed = destroyed;
