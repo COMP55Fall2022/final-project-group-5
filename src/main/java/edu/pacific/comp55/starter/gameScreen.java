@@ -1,7 +1,6 @@
 package edu.pacific.comp55.starter;
-import acm.program.*;
-import acm.util.RandomGenerator;
 
+import acm.program.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
@@ -17,9 +16,11 @@ public class gameScreen extends GraphicsProgram{
 	private GRect start;
 	private GRect score;
 	
+	public Scoreboard scoreboard;
+	
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
-	
+		requestFocus();
 	}
 
 	public void run() {
@@ -41,7 +42,7 @@ public class gameScreen extends GraphicsProgram{
 		startGame.setFont("Arial-Bold-22");
 		startGame.setColor(Color.WHITE);
 		add(startGame);
-		GRect start = new GRect(176, 187, 140, 40);
+		start = new GRect(176, 187, 140, 40);
 		start.setColor(Color.WHITE);
 		add(start);
 		
@@ -49,7 +50,7 @@ public class gameScreen extends GraphicsProgram{
 		scoreboard.setFont("Arial-Bold-22");
 		scoreboard.setColor(Color.WHITE);
 		add(scoreboard);
-		GRect score = new GRect(176, 240, 140, 40);
+		score = new GRect(176, 240, 140, 40);
 		score.setColor(Color.WHITE);
 		add(score);
 		
@@ -88,7 +89,8 @@ public class gameScreen extends GraphicsProgram{
 			System.out.println("start");
 		}
 		else if (getElementAt(e.getX(), e.getY()) == score) {
-			System.out.println("score");
+			System.out.println("scoreboard");
+			scoreboard.Draw();
 		}
 		else {
 			System.out.println("nothing");
