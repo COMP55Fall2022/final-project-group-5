@@ -14,7 +14,7 @@ public class Invaders {
 		this.x = x;
 		this.y = y;
 		
-		GImage invaders = new GImage("images/invaders.png");
+		GImage invaders = new GImage("media/invaders.png");
 		bomb = new Bomb(x, y);
 	}
 	public void act(int direction) {

@@ -15,7 +15,7 @@ public class gameScreen extends GraphicsProgram{
 	
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
-	private static final Bomb Bomb = null;
+	public Bomb bomb;
 	
 	private GRect start, score;
 	
@@ -95,7 +95,10 @@ public class gameScreen extends GraphicsProgram{
 	private void drawGame() {
 		removeAll();
 		addBackground();
-		
+		GRect bomb = new GRect(10, 20, 40, 40);
+		bomb.setColor(Color.GRAY);
+		bomb.setFilled(true);
+		add(bomb);
 	}
 	
 	private void drawScoreboard() {
