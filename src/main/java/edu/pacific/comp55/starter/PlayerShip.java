@@ -1,11 +1,12 @@
 package edu.pacific.comp55.starter;
 import acm.graphics.*;
+
 import acm.program.*;
 import acm.util.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class PlayerShip  {
+public class PlayerShip extends GraphicsProgram {
 	private Shot shot;
 	private int lives;
 	int k;
@@ -13,6 +14,8 @@ public class PlayerShip  {
 	int y;
 	int START_X = 200;
 	int START_Y = 200;
+	GObject playerShip = new GImage("images/playerShip.png", START_X, START_Y);
+	
 	
 	private void setX(int x) {
 		this.x = x;
@@ -27,12 +30,28 @@ public class PlayerShip  {
 	}
 	
 	public void initPlayerShip() {
-		GObject playerShip = new GImage("images/playerShip.png");
 		setX(START_X);
 		setY(START_Y);
 	}
 	
-
+	public void run() {
+		add(playerShip);
+		addKeyListeners();
+	}
+	
+	public void move() {
+		x += k;
+		
+		if (x <= 2) {
+			x = 2;
+		}
+		
+		if (x >= gameScreen.PROG_WIDTH - 2 * 500) {
+			x = gameScreen.PROG_WIDTH - 2 * 500;
+		}
+	}
+	
+	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
@@ -45,6 +64,7 @@ public class PlayerShip  {
 		}
 	}
 	
+	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		
@@ -74,6 +94,6 @@ public class PlayerShip  {
 	}
 	
 	public static void main(String[] args) {
-		
+		new PlayerShip().start();
 	}
 }
