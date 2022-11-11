@@ -3,12 +3,16 @@ package edu.pacific.comp55.starter;
 import java.awt.Color;
 
 import acm.graphics.GRect;
+import acm.program.GraphicsProgram;
 
-public class Bomb extends GraphicsProgram {
-	
+public class Bomb {
+	GraphicsProgram gameScreenRef;
 	private int x;
 	private int y;
 	private boolean destroyed;
+	public Bomb(GraphicsProgram ref){
+		gameScreenRef = ref;
+	}
 	public Bomb(int x, int y) {
 		 initBomb(x , y);
 	}
@@ -19,6 +23,8 @@ public class Bomb extends GraphicsProgram {
 		Invaders(true);
 		GRect bomb = new GRect(10, 20, 40, 40);
 		bomb.setColor(Color.GRAY);
+		bomb.setFilled(true);
+		gameScreenRef.add(bomb);
 		
 	}
 	private void Invaders(boolean destroyed) {
