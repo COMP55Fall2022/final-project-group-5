@@ -23,16 +23,22 @@ public class gameScreen extends GraphicsProgram{
 	}
 
 	public void run() {
+		scoreboard = new Scoreboard(this);
 		// all draws
-		GImage background = new GImage("media/spaceBackground.jpg");
-		background.setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
-		add(background);
 		drawMainMenu();
 		addKeyListeners();
 		addMouseListeners();
 	}
 	
+	private void addBackground() {
+		GImage background = new GImage("media/spaceBackground.jpg");
+		background.setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
+		add(background);
+	}
+	
 	private void drawMainMenu() {
+		addBackground();
+		
 		GLabel title = new GLabel("INVADERZ", 150, 150);
 		title.setFont("Arial-Bold-40");
 		title.setColor(Color.WHITE);
@@ -54,22 +60,22 @@ public class gameScreen extends GraphicsProgram{
 		add(score);
 		
 		GImage movement = new GImage("media/movementCTRL.png");
-		movement.setLocation(258, 380);
+		movement.setLocation(260, 380);
 		movement.setSize(65, 50);
 		
 		GImage fire = new GImage("media/SpaceBar.png");
-		fire.setLocation(165, 380);
+		fire.setLocation(167, 380);
 		fire.setSize(75, 50);
 		
-		GLabel controls = new GLabel("Controls", 207, 360);
+		GLabel controls = new GLabel("Controls", 209, 360);
 		controls.setFont("Arial-Bold-18");
 		controls.setColor(Color.WHITE);
 		
-		GLabel fireShot = new GLabel("Fire", 190, 450);
+		GLabel fireShot = new GLabel("Fire", 192, 450);
 		fireShot.setFont("Arial-Bold-15");
 		fireShot.setColor(Color.WHITE);
 		
-		GLabel move = new GLabel("Move", 270, 450);
+		GLabel move = new GLabel("Move", 272, 450);
 		move.setFont("Arial-Bold-15");
 		move.setColor(Color.WHITE);
 		
@@ -84,10 +90,12 @@ public class gameScreen extends GraphicsProgram{
 	
 	private void drawGame() {
 		removeAll();
-		GImage background = new GImage("media/spaceBackground.jpg");
-		background.setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
-		add(background);
+		addBackground();
 		
+	}
+	
+	private void drawScoreboard() {
+		scoreboard.Draw();
 	}
 	
 	@Override
@@ -98,7 +106,12 @@ public class gameScreen extends GraphicsProgram{
 		}
 		else if (getElementAt(e.getX(), e.getY()) == score) {
 			System.out.println("scoreboard");
-			//scoreboard.Draw();
+			drawScoreboard();
+		}
+		else if (getElementAt(e.getX(), e.getY()) == scoreboard.exit) {
+			System.out.println("scoreboard exit");
+			scoreboard.Exit();
+			drawMainMenu();
 		}
 		else {
 			System.out.println("nothing");
