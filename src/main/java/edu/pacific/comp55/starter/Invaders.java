@@ -2,6 +2,7 @@ package edu.pacific.comp55.starter;
 
 import acm.graphics.GImage;
 
+
 public class Invaders {
 	private Bomb bomb;
 	private int x;
@@ -17,7 +18,7 @@ public class Invaders {
 		bomb = new Bomb(x, y);
 	}
 	public void act(int direction) {
-		
+		this.x += direction;
 	}
 	public Bomb getBomb() {
 		return bomb;

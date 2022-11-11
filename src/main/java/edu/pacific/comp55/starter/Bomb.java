@@ -4,23 +4,24 @@ import java.awt.Color;
 
 import acm.graphics.GRect;
 
-public class Bomb {
-
+public class Bomb extends GraphicsProgram {
+	
 	private int x;
 	private int y;
 	private boolean destroyed;
 	public Bomb(int x, int y) {
 		 initBomb(x , y);
 	}
+	
 	private void initBomb(int x, int y) {
 		this.x = x;
 		this.y = y;
-		invaders(true);
+		Invaders(true);
 		GRect bomb = new GRect(10, 20, 40, 40);
 		bomb.setColor(Color.GRAY);
 		
 	}
-	private void invaders(boolean destroyed) {
+	private void Invaders(boolean destroyed) {
 		this.destroyed = destroyed;
 	}
 		public boolean isDestroyed() {
