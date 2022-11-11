@@ -2,8 +2,6 @@ package edu.pacific.comp55.starter;
 import acm.graphics.*;
 
 import acm.program.*;
-import acm.util.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class PlayerShip extends GraphicsProgram {
@@ -15,7 +13,6 @@ public class PlayerShip extends GraphicsProgram {
 	int START_X = 200;
 	int START_Y = 200;
 	GObject playerShip = new GImage("images/playerShip.png", START_X, START_Y);
-	
 	
 	private void setX(int x) {
 		this.x = x;
@@ -36,6 +33,7 @@ public class PlayerShip extends GraphicsProgram {
 	
 	public void run() {
 		add(playerShip);
+		
 		addKeyListeners();
 	}
 	
@@ -56,11 +54,11 @@ public class PlayerShip extends GraphicsProgram {
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_LEFT) {
-			k = -2;
+			playerShip.move(-75, 0);
 		}
 		
 		if (key == KeyEvent.VK_RIGHT) {
-			k = 2;
+			playerShip.move(75, 0);
 		}
 	}
 	
