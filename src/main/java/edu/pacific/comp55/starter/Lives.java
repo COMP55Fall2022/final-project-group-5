@@ -10,9 +10,14 @@ public class Lives{
 		  if(livesCounter == -1) {
 		    System.out.println("Lost");  
 		  }
-		 
-		  
+		  else
+		  {
+		  System.out.println(livesCounter);
 		  }
+		  return livesCounter;
+		}
+
+		  
 	
 	
 }
