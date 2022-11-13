@@ -8,8 +8,13 @@ import acm.graphics.*;
 
 public class Scoreboard {
 	GraphicsProgram gameScreenRef;
-	protected GRect exit;
+	private GRect exit;
 	
+	
+	public GRect getExit() {
+		return exit;
+	}
+
 	Scoreboard(GraphicsProgram ref){
 		gameScreenRef = ref;
 	}

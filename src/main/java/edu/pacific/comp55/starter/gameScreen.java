@@ -108,7 +108,7 @@ public class gameScreen extends GraphicsProgram{
 			System.out.println("scoreboard");
 			drawScoreboard();
 		}
-		else if (getElementAt(e.getX(), e.getY()) == scoreboard.exit) {
+		else if (getElementAt(e.getX(), e.getY()) == scoreboard.getExit()) {
 			System.out.println("scoreboard exit");
 			scoreboard.Exit();
 			drawMainMenu();
