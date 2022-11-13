@@ -6,12 +6,16 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+
+import org.apache.commons.math3.analysis.function.Add;
+
 import acm.graphics.*;
 
 public class gameScreen extends GraphicsProgram{
 	
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
+	public Bomb bomb;
 	
 	private GRect start, score;
 	
@@ -91,7 +95,10 @@ public class gameScreen extends GraphicsProgram{
 	private void drawGame() {
 		removeAll();
 		addBackground();
-		
+		GRect bomb = new GRect(10, 20, 40, 40);
+		bomb.setColor(Color.GRAY);
+		bomb.setFilled(true);
+		add(bomb);
 	}
 	
 	private void drawScoreboard() {
@@ -122,4 +129,4 @@ public class gameScreen extends GraphicsProgram{
 	public static void main(String[] args) {
 		new gameScreen().start();
 	}
-}
+	}
