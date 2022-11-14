@@ -7,7 +7,6 @@ import java.awt.event.KeyEvent;
 public class PlayerShip extends GraphicsProgram {
 	private Shot shot;
 	private int lives;
-	int k;
 	int x;
 	int y;
 	int START_X = 350;
@@ -29,6 +28,14 @@ public class PlayerShip extends GraphicsProgram {
 	public void initPlayerShip() {
 		setX(START_X);
 		setY(START_Y);
+	}
+	
+	public double getX() {
+		return playerShip.getX();
+	}
+	
+	public double getY() {
+		return playerShip.getY();
 	}
 	
 	public void run() {
