@@ -37,17 +37,6 @@ public class PlayerShip extends GraphicsProgram {
 		addKeyListeners();
 	}
 	
-//	public void move() {
-//		x += k;
-//		
-//		if (x <= 2) {
-//			x = 2;
-//		}
-//		
-//		if (x >= gameScreen.PROG_WIDTH - 2 * 500) {
-//			x = gameScreen.PROG_WIDTH - 2 * 500;
-//		}
-//	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -59,6 +48,10 @@ public class PlayerShip extends GraphicsProgram {
 		
 		if (key == KeyEvent.VK_RIGHT) {
 			playerShip.move(75, 0);
+		}
+		
+		if (key == KeyEvent.VK_ESCAPE) {
+			//connect to pause menu once pause menu created
 		}
 	}
 	
@@ -79,7 +72,7 @@ public class PlayerShip extends GraphicsProgram {
 		
 	}
 	
-	public void pause() { //connect to the pause button
+	public void pause() { 
 		
 	}
 	
