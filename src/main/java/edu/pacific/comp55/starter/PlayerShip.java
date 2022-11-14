@@ -10,9 +10,9 @@ public class PlayerShip extends GraphicsProgram {
 	int k;
 	int x;
 	int y;
-	int START_X = 200;
-	int START_Y = 200;
-	GObject playerShip = new GImage("images/playerShip.png", START_X, START_Y);
+	int START_X = 350;
+	int START_Y = 450;
+	GObject playerShip = new GImage("images/playerShip1.png", START_X, START_Y);
 	
 	private void setX(int x) {
 		this.x = x;
@@ -37,17 +37,17 @@ public class PlayerShip extends GraphicsProgram {
 		addKeyListeners();
 	}
 	
-	public void move() {
-		x += k;
-		
-		if (x <= 2) {
-			x = 2;
-		}
-		
-		if (x >= gameScreen.PROG_WIDTH - 2 * 500) {
-			x = gameScreen.PROG_WIDTH - 2 * 500;
-		}
-	}
+//	public void move() {
+//		x += k;
+//		
+//		if (x <= 2) {
+//			x = 2;
+//		}
+//		
+//		if (x >= gameScreen.PROG_WIDTH - 2 * 500) {
+//			x = gameScreen.PROG_WIDTH - 2 * 500;
+//		}
+//	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -67,11 +67,11 @@ public class PlayerShip extends GraphicsProgram {
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_LEFT) {
-			k = 0;
+			playerShip.move(0, 0);;
 		}
 		
 		if (key == KeyEvent.VK_RIGHT) {
-			k = 0;
+			playerShip.move(0, 0);;
 		}
 	}
 	
