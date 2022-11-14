@@ -95,7 +95,7 @@ public class gameScreen extends GraphicsProgram{
 	private void drawGame() {
 		removeAll();
 		addBackground();
-		GRect bomb = new GRect(10, 20, 40, 40);
+		GRect bomb = new GRect(5, 5, 5, 5);
 		bomb.setColor(Color.GRAY);
 		bomb.setFilled(true);
 		add(bomb);
