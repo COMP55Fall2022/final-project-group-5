@@ -16,9 +16,8 @@ public class gameScreen extends GraphicsProgram{
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
 	public Bomb bomb;
-	
 	private GRect start, score;
-	
+	public Invaders invaders;
 	public Scoreboard scoreboard;
 	
 	public void init() {
