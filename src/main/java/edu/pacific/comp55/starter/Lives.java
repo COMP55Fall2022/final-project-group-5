@@ -1,27 +1,32 @@
 package edu.pacific.comp55.starter;
 
-
+import acm.graphics.GImage;
 
 public class Lives{
 	
-    public static void main(String[] args) {  
-        //initialize counter  
-        int livesCounter = 4;  
-          
-        //using for loop to decrement the counter variable  
-        for(int lives=0; lives<4; lives++){  
-        	//write the condition when hit by the enemy
-            //decrement counter variable  
-            livesCounter = livesCounter - 1;  
-            //print the counter variable value  when shot
-            System.out.println(livesCounter);  
-            if(livesCounter == 0) {
-                System.out.println("Lost");  
-
-            }
-        }  
-    }
+	static int count(int livesCounter) {
+		  livesCounter = livesCounter - 1; 
+		  if(livesCounter == -1) {
+		    System.out.println("Lost");  
+		  }
+		  else
+		  {
+		  System.out.println(livesCounter);
+		  }
+		  return livesCounter;
+		}
+	public static void main(String[] args) {
+	    int livesCounter = 3;  
+	  livesCounter=count(livesCounter);
+	  livesCounter=count(livesCounter);
+	 
+	  
+	  
+	  }
+		  
 	
 	
 }
-//new 13
+
+
+   

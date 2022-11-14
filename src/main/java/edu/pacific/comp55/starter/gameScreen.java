@@ -95,7 +95,7 @@ public class gameScreen extends GraphicsProgram{
 	private void drawGame() {
 		removeAll();
 		addBackground();
-		GRect bomb = new GRect(10, 20, 40, 40);
+		GRect bomb = new GRect(5, 5, 5, 5);
 		bomb.setColor(Color.GRAY);
 		bomb.setFilled(true);
 		add(bomb);
@@ -115,7 +115,7 @@ public class gameScreen extends GraphicsProgram{
 			System.out.println("scoreboard");
 			drawScoreboard();
 		}
-		else if (getElementAt(e.getX(), e.getY()) == scoreboard.exit) {
+		else if (getElementAt(e.getX(), e.getY()) == scoreboard.getExit()) {
 			System.out.println("scoreboard exit");
 			scoreboard.Exit();
 			drawMainMenu();
