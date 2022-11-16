@@ -1,6 +1,7 @@
 package edu.pacific.comp55.starter;
 
 import acm.program.GraphicsProgram;
+import javafx.util.Pair;
 import acm.program.*;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -13,9 +14,13 @@ import acm.graphics.*;
 public class Scoreboard {
 	GraphicsProgram gameScreenRef;
 	private GRect exit;
-	private Map<String, Long> ranks = Map.ofEntries(Map.entry("P1", 0L), 
-			Map.entry("P2", 0L), 
-			Map.entry("P3", 0L));
+	private ArrayList<Pair<String, Long>> ranks = new ArrayList<Pair<String, Long>>() {
+		 {
+             add(new Pair<>("p1", 0L));
+             add(new Pair<>("p1", 0L));
+             add(new Pair<>("p1", 0L));
+         }
+	};
 	
 	public GRect getExit() {
 		return exit;
@@ -48,30 +53,22 @@ public class Scoreboard {
 		gameScreenRef.add(x2);
 		gameScreenRef.add(exit);
 		
-		int i = 0;
-		for (Map.Entry<String,Long> entry : ranks.entrySet()) {
+		for (int i = 0; i < ranks.size(); i++) {
 			int y = 175 + i*50; 
-			GLabel rank = new GLabel("1. N/A - 00:00:00", 153, y);
+			GLabel rank = new GLabel((i+1)+". N/A - 00:00:00", 153, y);
 			rank.setFont("Arial-Bold-22");
 			rank.setColor(Color.WHITE);
 			gameScreenRef.add(rank);;
-			i++;
 		}
 		//140
 		
 	}
 	
 	public void setRanks(Long elapseTime, String name) {
-		Map<String,Long> newMap = new HashMap<>();
-		for (Map.Entry<String,Long> entry : ranks.entrySet()) {
-			if (entry.getValue() < elapseTime) {
-		        newMap.put(name, elapseTime);
-		        newMap.put(entry.getKey(), entry.getValue());
+		for (int i = 0; i < ranks.size();i++) {
+			if (ranks.get(i).getValue() < elapseTime) {				
+				ranks.set(i, new Pair<> (name, elapseTime));
 			}
-			else {
-		        newMap.put(entry.getKey(), entry.getValue());
-			}
-			ranks = newMap;
 		}
 	}
 	
