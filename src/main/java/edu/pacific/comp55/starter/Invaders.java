@@ -9,7 +9,7 @@ public class Invaders extends GraphicsProgram {
 	private Bomb bomb;
 	private int x;
 	private int y;
-	GObject invaders = new GImage("media/invaders(test).PNG");
+	GObject invaders = new GImage("media/invaders(resize).PNG");
 	public Invaders() {
 		initInvaders(x, y);
 	}
@@ -24,7 +24,6 @@ public class Invaders extends GraphicsProgram {
 	public Bomb getBomb() {
 		return bomb;	}
 	
-	@Override
 	public void run() {
 		add(invaders);
 		

@@ -24,7 +24,7 @@ public class Bomb {
 		GRect bomb = new GRect(10, 20, 40, 40);
 		bomb.setColor(Color.GRAY);
 		bomb.setFilled(true);
-		gameScreenRef.add(bomb);
+		
 		
 	}
 	private void Invaders(boolean destroyed) {
