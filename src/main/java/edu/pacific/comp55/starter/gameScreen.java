@@ -142,7 +142,7 @@ public class gameScreen extends GraphicsProgram{
 			System.out.println("nothing");
 		}
 	}
-	
+	//private void update ()
 
 	public static void main(String[] args) {
 		new gameScreen().start();
