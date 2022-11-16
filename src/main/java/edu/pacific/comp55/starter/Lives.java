@@ -19,7 +19,8 @@ public class Lives{
 	    int livesCounter = 3;  
 	  livesCounter=count(livesCounter);
 	  livesCounter=count(livesCounter);
-	 
+	  livesCounter=count(livesCounter);
+	  livesCounter=count(livesCounter);
 	  
 	  
 	  }
