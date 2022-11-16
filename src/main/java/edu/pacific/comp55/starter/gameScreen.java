@@ -95,7 +95,23 @@ public class gameScreen extends GraphicsProgram{
 	private void drawGame() {
 		removeAll();
 		addBackground();
-		GRect bomb = new GRect(5, 5, 5, 5);
+		
+		GLabel lives = new GLabel("Lives: ", 300, 20); 
+		lives.setFont("Arial-Bold-18");
+		lives.setColor(Color.WHITE);
+		add(lives);
+		
+		GRect pause = new GRect(17, 6, 30, 16);
+		pause.setColor(Color.WHITE);
+		add(pause);
+		
+		GLabel esc = new GLabel("Esc", 18, 20); 
+		esc.setFont("Arial-Bold-16");
+		esc.setColor(Color.WHITE);
+		add(esc);
+		
+		
+		GRect bomb = new GRect(200, 200, 5, 5);
 		bomb.setColor(Color.GRAY);
 		bomb.setFilled(true);
 		add(bomb);
