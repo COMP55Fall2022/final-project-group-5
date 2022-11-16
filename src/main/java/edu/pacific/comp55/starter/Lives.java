@@ -16,19 +16,26 @@ public class Lives extends GraphicsProgram {
 	GraphicsProgram gamescreenRef;
 	int START_X = 10;
 	int START_Y = 10;
-	GObject livesImage = new GImage("images/playerShip1.png", START_X, START_Y);
-	//private ArrayList<GImage>Lives;
+	private int liveCount = 3;
+	private ArrayList<GImage>Lives = new ArrayList<GImage>() {
+		{
+		add(new GImage("images/lives(test).png", 365, 5));
+		add(new GImage("images/lives(test).png", 400, 5));
+		add(new GImage("images/lives(test).png", 435, 5));
+		}
+	};
 	Lives(GraphicsProgram Ref) {
 		gamescreenRef = Ref;
 	}
-	
+
 	public void drawLives() {
-		GImage Live1 = new GImage("images/lives(test).png", 365, 5);
-		gamescreenRef.add(Live1);
-		GImage Live2 = new GImage("images/lives(test).png", 400, 5);
-		gamescreenRef.add(Live2);
-		GImage Live3 = new GImage("images/lives(test).png", 435, 5);
-		gamescreenRef.add(Live3);
+		for (GImage life : Lives) {
+			gamescreenRef.add(life);
+		}
+	}
+	
+	public void deleteImage() {
+		Lives.remove(Lives.size()-1);
 	}
 	
 	static int count(int livesCounter) {
@@ -56,7 +63,7 @@ public class Lives extends GraphicsProgram {
 	
 	public void run() {
 		// TODO Auto-generated method stub
-		add(livesImage);
+		//add(livesImage);
 	
 		
 		
