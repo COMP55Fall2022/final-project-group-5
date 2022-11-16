@@ -17,13 +17,14 @@ public class Lives extends GraphicsProgram {
 	int START_X = 10;
 	int START_Y = 10;
 	GObject livesImage = new GImage("images/playerShip1.png", START_X, START_Y);
-	private ArrayList<GImage>Lives;
+	//private ArrayList<GImage>Lives;
 	Lives(GraphicsProgram Ref) {
 		gamescreenRef = Ref;
 	}
 	
-	public void Draw() {
-		//GImage Live1 = new GImage("images/lives1.png", )
+	public void drawLives() {
+		GImage Live1 = new GImage("images/lives(test).png", 365, 5);
+		gamescreenRef.add(Live1);
 	}
 	
 	static int count(int livesCounter) {

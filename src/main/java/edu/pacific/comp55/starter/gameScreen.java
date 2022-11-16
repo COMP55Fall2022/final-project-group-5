@@ -16,6 +16,7 @@ public class gameScreen extends GraphicsProgram{
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
 	public Bomb bomb;
+	public Lives life;
 	
 	private GRect start, score;
 	
@@ -28,6 +29,7 @@ public class gameScreen extends GraphicsProgram{
 
 	public void run() {
 		scoreboard = new Scoreboard(this);
+		life = new Lives(this);
 		// all draws
 		drawMainMenu();
 		addKeyListeners();
@@ -115,6 +117,7 @@ public class gameScreen extends GraphicsProgram{
 		bomb.setColor(Color.GRAY);
 		bomb.setFilled(true);
 		add(bomb);
+		life.drawLives();
 	}
 	
 	private void drawScoreboard() {
