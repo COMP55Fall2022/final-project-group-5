@@ -25,6 +25,10 @@ public class Lives extends GraphicsProgram {
 	public void drawLives() {
 		GImage Live1 = new GImage("images/lives(test).png", 365, 5);
 		gamescreenRef.add(Live1);
+		GImage Live2 = new GImage("images/lives(test).png", 400, 5);
+		gamescreenRef.add(Live2);
+		GImage Live3 = new GImage("images/lives(test).png", 435, 5);
+		gamescreenRef.add(Live3);
 	}
 	
 	static int count(int livesCounter) {
