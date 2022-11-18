@@ -22,6 +22,7 @@ public class gameScreen extends GraphicsProgram{
 	public Scoreboard scoreboard;
 	private PlayerShip player;
 	private PauseMenu pause;
+	private Shot shot;
 	private boolean gameStarted = false;
 	
 	public void init() {
@@ -156,6 +157,7 @@ public class gameScreen extends GraphicsProgram{
 		if(gameStarted) {
 			player.keyPressed(e);
 			pause.keyPressed(e);
+			shot.keyPressed(e);
 		}
 	}
 	//private void update ()
