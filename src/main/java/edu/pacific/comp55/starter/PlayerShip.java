@@ -9,8 +9,8 @@ public class PlayerShip {
 	private int lives;
 	int x;
 	int y;
-	int START_X = 350;
-	int START_Y = 450;
+	int START_X = 200;
+	int START_Y = 370;
 	GObject playerShip = new GImage("images/playerShip1.png", START_X, START_Y);
 	GraphicsProgram gameScr; 
 	
