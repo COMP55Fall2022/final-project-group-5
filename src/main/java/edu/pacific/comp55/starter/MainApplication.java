@@ -19,6 +19,7 @@ public class MainApplication extends GraphicsApplication {
 		menu = new MenuPane(this);
 		setupInteractions();
 		switchToMenu();
+		
 	}
 
 	public void switchToMenu() {
@@ -34,7 +35,9 @@ public class MainApplication extends GraphicsApplication {
 
 	private void playRandomSound() {
 		AudioPlayer audio = AudioPlayer.getInstance();
-		audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
+		//audio.playSound(MUSIC_FOLDER, SOUND_FILES[count % SOUND_FILES.length]);
+		//audio.playSound(MUSIC_FOLDER, "shoot.mp3");
+		audio.playSound(MUSIC_FOLDER, "video.mp4", true);
 	}
 	
 	public static void main(String[] args) {
