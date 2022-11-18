@@ -121,6 +121,7 @@ public class gameScreen extends GraphicsProgram{
 		life.drawLives();
 		
 		player = new PlayerShip(this);
+		invaders = new Invaders(this);
 		gameStarted = true;
 	}
 	
