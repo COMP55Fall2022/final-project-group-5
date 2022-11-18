@@ -20,6 +20,8 @@ public class gameScreen extends GraphicsProgram{
 	private GRect start, score;
 	public Invaders invaders;
 	public Scoreboard scoreboard;
+	private PlayerShip player;
+	private boolean gameStarted = false;
 	
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
@@ -117,6 +119,9 @@ public class gameScreen extends GraphicsProgram{
 		bomb.setFilled(true);
 		add(bomb);
 		life.drawLives();
+		
+		player = new PlayerShip(this);
+		gameStarted = true;
 	}
 	
 	private void drawScoreboard() {
@@ -140,6 +145,14 @@ public class gameScreen extends GraphicsProgram{
 		}
 		else {
 			System.out.println("nothing");
+		}
+	}
+	
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(gameStarted) {
+			player.keyPressed(e);
 		}
 	}
 	//private void update ()

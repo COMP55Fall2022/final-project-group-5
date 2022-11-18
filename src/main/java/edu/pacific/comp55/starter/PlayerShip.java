@@ -4,7 +4,7 @@ import acm.graphics.*;
 import acm.program.*;
 import java.awt.event.KeyEvent;
 
-public class PlayerShip extends GraphicsProgram {
+public class PlayerShip {
 	private Shot shot;
 	private int lives;
 	int x;
@@ -12,6 +12,12 @@ public class PlayerShip extends GraphicsProgram {
 	int START_X = 350;
 	int START_Y = 450;
 	GObject playerShip = new GImage("images/playerShip1.png", START_X, START_Y);
+	GraphicsProgram gameScr; 
+	
+	public PlayerShip(GraphicsProgram screen) {
+		gameScr = screen;
+		gameScr.add(playerShip);
+	}
 	
 	private void setX(int x) {
 		this.x = x;
@@ -39,13 +45,9 @@ public class PlayerShip extends GraphicsProgram {
 	}
 	
 	public void run() {
-		add(playerShip);
-		
-		addKeyListeners();
+		gameScr.add(playerShip);
 	}
 	
-	
-	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
@@ -62,7 +64,6 @@ public class PlayerShip extends GraphicsProgram {
 		}
 	}
 	
-	@Override
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		
@@ -91,7 +92,4 @@ public class PlayerShip extends GraphicsProgram {
 		
 	}
 	
-	public static void main(String[] args) {
-		new PlayerShip().start();
-	}
 }
