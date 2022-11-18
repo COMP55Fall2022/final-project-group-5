@@ -21,6 +21,7 @@ public class gameScreen extends GraphicsProgram{
 	public Invaders invaders;
 	public Scoreboard scoreboard;
 	private PlayerShip player;
+	private PauseMenu pause;
 	private boolean gameStarted = false;
 	
 	public void init() {
@@ -104,9 +105,9 @@ public class gameScreen extends GraphicsProgram{
 		lives.setColor(Color.WHITE);
 		add(lives);
 		
-		GRect pause = new GRect(17, 6, 30, 16);
-		pause.setColor(Color.WHITE);
-		add(pause);
+		GRect pauseRect = new GRect(17, 6, 30, 16);
+		pauseRect.setColor(Color.WHITE);
+		add(pauseRect);
 		
 		GLabel esc = new GLabel("Esc", 18, 20); 
 		esc.setFont("Arial-Bold-16");
@@ -121,6 +122,7 @@ public class gameScreen extends GraphicsProgram{
 		life.drawLives();
 		
 		player = new PlayerShip(this);
+		pause = new PauseMenu(this);
 		gameStarted = true;
 	}
 	
@@ -153,6 +155,7 @@ public class gameScreen extends GraphicsProgram{
 	public void keyPressed(KeyEvent e) {
 		if(gameStarted) {
 			player.keyPressed(e);
+			pause.keyPressed(e);
 		}
 	}
 	//private void update ()
