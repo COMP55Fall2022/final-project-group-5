@@ -21,6 +21,7 @@ public class gameScreen extends GraphicsProgram{
 	public Invaders invaders;
 	public Scoreboard scoreboard;
 	private PlayerShip player;
+	private Shot shot;
 	private boolean gameStarted = false;
 	
 	public void init() {
@@ -153,6 +154,7 @@ public class gameScreen extends GraphicsProgram{
 	public void keyPressed(KeyEvent e) {
 		if(gameStarted) {
 			player.keyPressed(e);
+			shot.keyPressed(e);
 		}
 	}
 	//private void update ()
