@@ -68,11 +68,11 @@ public class PlayerShip {
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_LEFT) {
-			playerShip.move(0, 0);;
+			playerShip.move(0, 0);
 		}
 		
 		if (key == KeyEvent.VK_RIGHT) {
-			playerShip.move(0, 0);;
+			playerShip.move(0, 0);
 		}
 	}
 	
