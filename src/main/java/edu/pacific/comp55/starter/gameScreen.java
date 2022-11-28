@@ -123,6 +123,7 @@ public class gameScreen extends GraphicsProgram{
 		life.drawLives();
 		
 		player = new PlayerShip(this);
+		invaders = new Invaders(this);
 		pause = new PauseMenu(this);
 		gameStarted = true;
 	}
@@ -167,7 +168,7 @@ public class gameScreen extends GraphicsProgram{
 			shot.keyPressed(e);
 		}
 	}
-	//private void update ()
+	//private void update () comment
 
 	public static void main(String[] args) {
 		new gameScreen().start();
