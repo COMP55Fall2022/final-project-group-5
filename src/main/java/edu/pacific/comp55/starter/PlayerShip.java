@@ -4,6 +4,8 @@ import acm.graphics.*;
 import acm.program.*;
 import java.awt.event.KeyEvent;
 
+import javax.swing.Timer;
+
 
 public class PlayerShip {
 	private Lives life;
@@ -11,9 +13,10 @@ public class PlayerShip {
 	boolean damaged;
 	int x;
 	int y;
-	int START_X = 200;
-	int START_Y = 410;
-	GObject playerShip = new GImage("images/playerShip2.png", START_X, START_Y);
+	int START_X = 230;
+	int START_Y = 420;
+	private Timer t;
+	GObject playerShip = new GImage("images/playerShip4.png", START_X, START_Y);
 	GraphicsProgram gameScr; 
 	
 	public PlayerShip(GraphicsProgram screen) {
