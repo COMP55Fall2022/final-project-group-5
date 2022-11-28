@@ -9,8 +9,8 @@ import javax.swing.Timer;
 public class PlayerShip {
 	private Shot shot;
 	private Lives life;
+	private Bomb bomb;
 	boolean damaged;
-	private Timer t;
 	int x;
 	int y;
 	int START_X = 200;
@@ -82,8 +82,11 @@ public class PlayerShip {
 	}
 	
 	public void damaged() { 
-		damaged = true;
-		life.deleteImage();
+		if (bomb.checkHitShip() == true) { 
+			damaged = true;
+			life.deleteImage();
+		}
+
 		if (damaged = true) {
 			playerShip.setVisible(false);
 		}
