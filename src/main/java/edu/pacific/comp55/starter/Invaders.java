@@ -5,34 +5,53 @@ import acm.graphics.GObject;
 import acm.program.GraphicsProgram;
 
 
-public class Invaders extends GraphicsProgram {
+public class Invaders {
 	private Bomb bomb;
-	private int x;
-	private int y;
-	GObject invaders = new GImage("media/invaders(resize).PNG");
-	public Invaders() {
-		initInvaders(x, y);
+	int x;
+	int y;
+	int start_x = 50;
+	int start_y = 50;
+	GObject invaders = new GImage("media/new invaders resize.PNG", start_x, start_y);
+	GraphicsProgram gameScr; 
+	
+	public Invaders(GraphicsProgram screen) {
+		gameScr = screen;
+		gameScr.add(invaders);
 	}
-	private void initInvaders(int x, int y) {
-		this.x = x;
-		this.y = y;
+	
+	public Invaders() {
+		initInvaders();
+	}
+	private void initInvaders() {
+		setX(start_x);
+		setY(start_y);
 		bomb = new Bomb(x, y);
 	}
-	public void act(int direction) {
-		this.x += direction;
+	private void setX(int x) {
+		this.x = x;
 	}
+	private void setY(int y) {
+		this.y = y;
+	}
+	
+	public double getX() {
+		return invaders.getX();
+	}
+	
+	public double getY() {
+		return invaders.getY();
+	}
+	
 	public Bomb getBomb() {
-		return bomb;	}
+		return bomb;	
+		}
 	
 	public void run() {
-		add(invaders);
-		
-	}
-	public static void main (String[] args) {
-		new Invaders().start();
+		gameScr.add(invaders);
 	}
 }
 		
+	//comment
 
 
 
