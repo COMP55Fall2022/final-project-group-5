@@ -12,7 +12,7 @@ public class PlayerShip {
 	int x;
 	int y;
 	int START_X = 200;
-	int START_Y = 370;
+	int START_Y = 410;
 	GObject playerShip = new GImage("images/playerShip2.png", START_X, START_Y);
 	GraphicsProgram gameScr; 
 	
