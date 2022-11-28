@@ -25,7 +25,7 @@ public class Invaders {
 	private void initInvaders() {
 		setX(start_x);
 		setY(start_y);
-		bomb = new Bomb(x, y);
+		//bomb = new Bomb(x, y);
 	}
 	private void setX(int x) {
 		this.x = x;
