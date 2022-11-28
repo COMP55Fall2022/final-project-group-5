@@ -146,6 +146,13 @@ public class gameScreen extends GraphicsProgram{
 			scoreboard.Exit();
 			drawMainMenu();
 		}
+		else if (getElementAt(e.getX(), e.getY()) == pause.getExit()) {
+			pause.removeDraw();
+			drawMainMenu();
+		}
+		else if (getElementAt(e.getX(), e.getY()) == pause.getResume()) {
+			pause.removeDraw();
+		}
 		else {
 			System.out.println("nothing");
 		}
