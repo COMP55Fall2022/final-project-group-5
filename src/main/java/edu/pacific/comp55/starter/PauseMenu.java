@@ -14,9 +14,14 @@ public class PauseMenu {
 	private GRect resumeBox, exitBox, popUp;
 	private GLabel pause, resume, exit;
 	private GLine pauseLine;
+	private boolean pauseGame = false;
 	
 	PauseMenu(GraphicsProgram ref){
 		gameScreenRef = ref;
+	}
+	
+	public boolean getPause() {
+		return pauseGame;
 	}
 	
 	public GRect getResume() {
@@ -75,6 +80,7 @@ public class PauseMenu {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_ESCAPE) {
 			Draw();
+			pauseGame = true;
 			System.out.println("pause");
 		}
 	}
