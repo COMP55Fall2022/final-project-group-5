@@ -10,6 +10,8 @@ public class Invaders extends GraphicsProgram {
 	private int x;
 	private int y;
 	GObject invaders = new GImage("media/invaders(resize).PNG");
+	
+	
 	public Invaders() {
 		initInvaders(x, y);
 	}
