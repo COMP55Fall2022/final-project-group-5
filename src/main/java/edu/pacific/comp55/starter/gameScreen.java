@@ -158,7 +158,7 @@ public class gameScreen extends GraphicsProgram{
 			shot.keyPressed(e);
 		}
 	}
-	//private void update ()
+	//private void update () comment
 
 	public static void main(String[] args) {
 		new gameScreen().start();

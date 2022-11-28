@@ -11,12 +11,17 @@ public class Bomb extends GraphicsProgram {
 	private int y;
 	private boolean destroyed;
 	GRect bomb = new GRect(10, 20, 40, 40);
+	
 
 	
 	
 	public Bomb(int x2, int y2) {
 		initBomb(x, y);
 	
+	}
+
+	public Bomb() {
+		
 	}
 
 	private void initBomb(int x, int y) {
@@ -38,9 +43,9 @@ public class Bomb extends GraphicsProgram {
 			
 		}
 		public static void main(String[] args) {
-			//new Bomb().start();
+			new Bomb().start();
 		}
 		
 	}
 
-
+//comment
