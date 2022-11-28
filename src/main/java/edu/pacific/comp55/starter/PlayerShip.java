@@ -56,12 +56,13 @@ public class PlayerShip {
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
-		if (key == KeyEvent.VK_LEFT) {
-			playerShip.move(-75, 0);
+		if (key == KeyEvent.VK_LEFT && playerShip.getX() > 0) {
+			playerShip.move(-5, 0);
+			
 		}
 		
-		if (key == KeyEvent.VK_RIGHT) {
-			playerShip.move(75, 0);
+		if (key == KeyEvent.VK_RIGHT && playerShip.getX()+playerShip.getWidth() + 15 < gameScr.getWidth()) {
+			playerShip.move(5, 0);
 		}
 		
 	}

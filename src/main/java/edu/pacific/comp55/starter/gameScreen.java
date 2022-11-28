@@ -4,14 +4,21 @@ import acm.program.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-import org.apache.commons.math3.analysis.function.Add;
+import javax.swing.Timer;
 
 import acm.graphics.*;
+import acm.util.*;
+import java.awt.*;
+import java.awt.event.*;
 
-public class gameScreen extends GraphicsProgram{
+
+import org.apache.commons.math3.analysis.function.Add;
+
+public class gameScreen extends GraphicsProgram implements ActionListener{
 	
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
@@ -24,6 +31,7 @@ public class gameScreen extends GraphicsProgram{
 	private PauseMenu pause;
 	private Shot shot;
 	private boolean gameStarted = false;
+	private Timer invadersUpdateTimer;
 	
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
@@ -123,10 +131,19 @@ public class gameScreen extends GraphicsProgram{
 		gameStarted = true;
 		bomb = new Bomb(this);
 		bomb.createBomb(120, 200);
+		invadersUpdateTimer = new Timer(100, this);
+		invadersUpdateTimer.start();
 	}
 	
 	private void drawScoreboard() {
 		scoreboard.Draw();
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if( e.getSource() == invadersUpdateTimer) {
+			//invaders.
+		}
 	}
 	
 	@Override
@@ -162,10 +179,13 @@ public class gameScreen extends GraphicsProgram{
 		if(gameStarted) {
 			player.keyPressed(e);
 			pause.keyPressed(e);
-			shot.keyPressed(e);
+			if( shot != null) {
+				shot.keyPressed(e);
+			}
 		}
 	}
-	//private void update () comment
+
+	
 
 	public static void main(String[] args) {
 		new gameScreen().start();
