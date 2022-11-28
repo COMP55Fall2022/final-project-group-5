@@ -114,18 +114,15 @@ public class gameScreen extends GraphicsProgram{
 		esc.setFont("Arial-Bold-16");
 		esc.setColor(Color.WHITE);
 		add(esc);
-		
-		
-		GRect bomb = new GRect(200, 200, 5, 5);
-		bomb.setColor(Color.GRAY);
-		bomb.setFilled(true);
-		add(bomb);
+
 		life.drawLives();
 		
 		player = new PlayerShip(this);
 		invaders = new Invaders(this);
 		pause = new PauseMenu(this);
 		gameStarted = true;
+		bomb = new Bomb(this);
+		bomb.createBomb(120, 200);
 	}
 	
 	private void drawScoreboard() {

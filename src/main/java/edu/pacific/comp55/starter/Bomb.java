@@ -10,14 +10,14 @@ public class Bomb extends GraphicsProgram {
 	private int x;
 	private int y;
 	private boolean destroyed;
-	GRect bomb = new GRect(10, 20, 40, 40);
-	
+	GRect bomb = new GRect(63, 75, 3, 10);
+	GraphicsProgram gameScr; 
+	public Bomb(GraphicsProgram screen) {
+		gameScr = screen;
+	}
 
-	
-	
-	public Bomb(int x2, int y2) {
+	public void createBomb(int x2, int y2) {
 		initBomb(x, y);
-	
 	}
 
 	public Bomb() {
@@ -30,6 +30,7 @@ public class Bomb extends GraphicsProgram {
 		Invaders(true);
 		bomb.setColor(Color.GRAY);
 		bomb.setFilled(true);
+		gameScr.add(bomb);
 	}
 	private void Invaders(boolean destroyed) {
 		this.destroyed = destroyed;
