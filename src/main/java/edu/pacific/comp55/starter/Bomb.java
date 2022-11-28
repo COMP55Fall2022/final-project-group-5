@@ -45,6 +45,11 @@ public class Bomb extends GraphicsProgram {
 		public static void main(String[] args) {
 			new Bomb().start();
 		}
+
+		public boolean checkHitShip() {
+			// TODO Auto-generated method stub
+			return false;
+		}
 		
 	}
 

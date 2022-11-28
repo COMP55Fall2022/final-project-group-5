@@ -4,9 +4,13 @@ import acm.graphics.*;
 import acm.program.*;
 import java.awt.event.KeyEvent;
 
+import javax.swing.Timer;
+
 public class PlayerShip {
 	private Shot shot;
-	private int lives;
+	private Lives life;
+	private Bomb bomb;
+	boolean damaged;
 	int x;
 	int y;
 	int START_X = 200;
@@ -59,37 +63,33 @@ public class PlayerShip {
 			playerShip.move(75, 0);
 		}
 		
-		if (key == KeyEvent.VK_ESCAPE) {
-			//connect to pause menu once pause menu created
-		}
 	}
 	
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_LEFT) {
-			playerShip.move(0, 0);;
+			playerShip.move(0, 0);
 		}
 		
 		if (key == KeyEvent.VK_RIGHT) {
-			playerShip.move(0, 0);;
+			playerShip.move(0, 0);
 		}
 	}
 	
 	public void revive() { 
-		
-	}
-	
-	public void pause() { 
-		
-	}
-	
-	public void resume() { //connect to resume button
-		
+		playerShip.setVisible(true);
 	}
 	
 	public void damaged() { 
-		
+		if (bomb.checkHitShip() == true) { 
+			damaged = true;
+			life.deleteImage();
+		}
+
+		if (damaged = true) {
+			playerShip.setVisible(false);
+		}
 	}
 	
 }
