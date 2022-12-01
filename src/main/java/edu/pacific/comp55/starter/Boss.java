@@ -5,6 +5,7 @@ import acm.graphics.GObject;
 import acm.program.GraphicsProgram;
 
 
+
 public class Boss {
 	private Bomb bomb;
 	int x;
@@ -20,4 +21,31 @@ public class Boss {
 		gameScr = screen;
 		gameScr.add(Boss);
 	}
+	
+	public Boss() {
+		initBoss();
 	}
+	private void initBoss() {
+		setX(start_x);
+		setY(start_y);
+		
+		private void setX(int x) {
+			this.x = x;
+		}
+		private void setY(int y) {
+			this.y = y;
+		}
+           
+		public double getX() {
+			return Boss.getX();
+		}
+		
+		public double getY() {
+			return Boss.getY();
+		}
+		
+	}
+	
+	
+	
+	
