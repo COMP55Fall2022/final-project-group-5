@@ -41,6 +41,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	public void run() {
 		scoreboard = new Scoreboard(this);
 		life = new Lives(this);
+		shot = new Shot(this);
 		// all draws
 		drawMainMenu();
 		addKeyListeners();
@@ -128,6 +129,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 		player = new PlayerShip(this);
 		invaders = new Invaders(this);
 		pause = new PauseMenu(this);
+//		shot = new Shot(this);
 		gameStarted = true;
 		bomb = new Bomb(this);
 		bomb.createBomb(120, 200);
@@ -179,11 +181,14 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
 		if(gameStarted) {
 			player.keyPressed(e);
 			pause.keyPressed(e);
 			if( shot != null) {
-				shot.keyPressed(e);
+				if (key == KeyEvent.VK_SPACE) {
+				shot.addAShot(player.getX(), player.getY());
+				}
 			}
 		}
 	}
