@@ -1,7 +1,9 @@
 package edu.pacific.comp55.starter;
+import java.awt.event.ActionEvent;
 
 import acm.graphics.GImage;
 import acm.graphics.GObject;
+import acm.graphics.GOval;
 import acm.program.GraphicsProgram;
 
 
@@ -12,7 +14,7 @@ public class Invaders {
 	int start_x = 50;
 	int start_y = 50;
 	GObject invaders = new GImage("media/new invaders resize.PNG", start_x, start_y);
-	GraphicsProgram gameScr; 
+	GraphicsProgram gameScr;
 	
 	public Invaders(GraphicsProgram screen) {
 		gameScr = screen;
@@ -22,14 +24,17 @@ public class Invaders {
 	public Invaders() {
 		initInvaders();
 	}
+
 	private void initInvaders() {
 		setX(start_x);
 		setY(start_y);
 		//bomb = new Bomb(x, y);
 	}
+	
 	private void setX(int x) {
 		this.x = x;
 	}
+	
 	private void setY(int y) {
 		this.y = y;
 	}
@@ -42,6 +47,18 @@ public class Invaders {
 		return invaders.getY();
 	}
 	
+	public void act(int direction) {
+		this.x += direction;
+	}
+	
+	public void move() {
+		if (x < 0) {
+			x = start_x;
+		}
+			x -= 1;
+		}
+
+	
 	public Bomb getBomb() {
 		return bomb;	
 		}
@@ -49,8 +66,13 @@ public class Invaders {
 	public void run() {
 		gameScr.add(invaders);
 	}
+	
+	public void actionPerformed(ActionEvent e) {
+
+	}
+	
 }
-		
+
 	//comment
 
 
