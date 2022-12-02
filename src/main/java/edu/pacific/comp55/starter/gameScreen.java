@@ -138,14 +138,17 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	private void drawScoreboard() {
 		scoreboard.Draw();
 	}
-	
+
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if( e.getSource() == invadersUpdateTimer) {
-			//invaders.
+			//
 		}
 	}
 	
+
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (getElementAt(e.getX(), e.getY()) == start) {
