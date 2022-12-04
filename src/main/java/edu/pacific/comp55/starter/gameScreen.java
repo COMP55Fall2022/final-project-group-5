@@ -192,7 +192,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 			pause.keyPressed(e);
 			if (shot != null) {
 				if (key == KeyEvent.VK_SPACE) {
-					shot.addAShot(player.getX(), player.getY());
+					shot.addAShot(player.getX() + 19, player.getY() - 5);
 				}
 			}
 		}
