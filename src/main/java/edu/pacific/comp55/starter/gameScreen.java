@@ -127,6 +127,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 		
 		player = new PlayerShip(this);
 		invaders = new Invaders(this);
+		shot = new Shot(this);
 		pause = new PauseMenu(this);
 		gameStarted = true;
 		bomb = new Bomb(this);
@@ -190,7 +191,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 			pause.keyPressed(e);
 			if( shot != null) {
 				if (key == KeyEvent.VK_SPACE) {
-					//shot.addAShot(player.getX(), player.getY());
+					shot.addAShot(player.getX(), player.getY());
 				}
 			}
 		}

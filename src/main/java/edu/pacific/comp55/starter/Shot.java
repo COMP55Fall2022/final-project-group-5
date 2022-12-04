@@ -13,26 +13,27 @@ import javax.swing.Timer;
 
 
 public class Shot implements ActionListener {
-	public static final int SIZE = 25;
+	public static final int SIZE = 10;
 	public static final int MS = 50;
-	public static final int SPEED = 2;
-	//GObject shot = new GImage("images/shot1.png");
+	public static final int SPEED = 10;
 	private ArrayList <GOval> shots;
-	//private Invaders ArrayList<GObject> enemies;
+	private ArrayList <Invaders> enemies;
 	public static Timer t;
-	PlayerShip ship;
 	private GObject s;
+	PlayerShip ship;
 	GraphicsProgram gameScr; 
 	
 	public Shot(GraphicsProgram screen) {
 		gameScr = screen;
-		
+		init();
 	}
 	
-	public void run() {
+	public void init() {
+		ship = new PlayerShip(gameScr);
 		shots = new ArrayList<GOval>();
-		t = new Timer(10, this);
-		t.start();
+		System.out.println("shot run");
+		t = new Timer(50, this);
+		t.start(); 
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -40,38 +41,38 @@ public class Shot implements ActionListener {
 		//removeShot();
 	}
 	
-	public void keyPressed(KeyEvent e) {
-		int key = e.getKeyCode();
-		
-		if (key == KeyEvent.VK_SPACE) {
-			GOval shot = makeShot(ship.getX(), 370);
-			addAShot(ship.getX());
-		}
-	}
+//	public void keyPressed(KeyEvent e) {
+//		int key = e.getKeyCode();
+//		
+//		if (key == KeyEvent.VK_SPACE) {
+//			addAShot(ship.getX());
+//		}
+//	}
 	
-	private void addAShot(double x) {
-		GOval shot = makeShot(x, SIZE/2);
+	public void addAShot(double x, double y) {
+		GOval shot = makeShot(x, y);
+		System.out.println("shot count");
 		gameScr.add(shot);
-		shots.add(shot);
+//		shots.add(shot);
 	}
 	
 	public GOval makeShot(double x, double y) {
 		GOval temp = new GOval(x-SIZE/2, y-SIZE/2, SIZE, SIZE);
 		temp.setColor(Color.WHITE);
 		temp.setFilled(true);
-		gameScr.add(temp);
+		shots.add(temp);
 		return temp;
 	}
 	
 	private void moveAllShotsOnce() {
 		for(GOval shot:shots) {
-			shot.move(SPEED, 0);
+			shot.move(0, -SPEED);
 		}
 	}
 	
 //	private void removeShot() {
 //		for(GOval shot: shots) {
-//			for(GRect enemy: enemies) {
+//			for(Invaders enemy: enemies) {
 //				s = getElementAt(shot.getX() + shot.getWidth() + 1, shot.getY() + shot.getHeight() / 2);
 //				if(s == enemy) {
 //					enemies.remove(s);

@@ -15,7 +15,8 @@ public class PlayerShip {
 	int y;
 	int START_X = 230;
 	int START_Y = 420;
-	private Timer t;
+	private Timer left;
+	private Timer right;
 	GObject playerShip = new GImage("images/playerShip4.png", START_X, START_Y);
 	GraphicsProgram gameScr; 
 	
@@ -72,10 +73,12 @@ public class PlayerShip {
 		
 		if (key == KeyEvent.VK_LEFT) {
 			playerShip.move(0, 0);
+			left.start();
 		}
 		
 		if (key == KeyEvent.VK_RIGHT) {
 			playerShip.move(0, 0);
+			right.start();
 		}
 	}
 	
