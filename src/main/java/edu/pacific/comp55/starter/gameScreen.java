@@ -32,7 +32,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	private Shot shot;
 	private boolean gameStarted = false;
 	private Timer invadersUpdateTimer;
-	private int invadersSpeed = 500;
+	private int invadersSpeed = 300;
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
 		requestFocus();
@@ -130,7 +130,6 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 		pause = new PauseMenu(this);
 		gameStarted = true;
 		bomb = new Bomb(this);
-		bomb.createBomb(120, 200);
 		invadersUpdateTimer = new Timer(invadersSpeed, this);
 		invadersUpdateTimer.start();
 		
@@ -143,11 +142,12 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if( e.getSource() == invadersUpdateTimer) {
+		if(e.getSource() == invadersUpdateTimer) {
 			invaders.Move();
+			invaders.dropBomb();
 			if (invaders.getBound()) {
 				invadersUpdateTimer.stop();
-				invadersSpeed -= 100;
+				invadersSpeed -= 25;
 				invadersUpdateTimer = new Timer(invadersSpeed, this);
 				invadersUpdateTimer.start();
 			}
