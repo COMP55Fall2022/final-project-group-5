@@ -9,14 +9,13 @@ import javax.swing.Timer;
 
 public class PlayerShip {
 	private Lives life;
-	private Bomb bomb;
+	//private Bomb bomb;
 	boolean damaged;
 	int x;
 	int y;
 	int START_X = 230;
 	int START_Y = 420;
-	private Timer left;
-	private Timer right;
+	private Timer t;
 	GObject playerShip = new GImage("images/playerShip4.png", START_X, START_Y);
 	GraphicsProgram gameScr; 
 	
@@ -73,19 +72,19 @@ public class PlayerShip {
 		
 		if (key == KeyEvent.VK_LEFT) {
 			playerShip.move(0, 0);
-			left.start();
 		}
 		
 		if (key == KeyEvent.VK_RIGHT) {
 			playerShip.move(0, 0);
-			right.start();
 		}
 	}
 	
 	public void revive() { 
 		playerShip.setVisible(true);
 	}
+}
 	
+	/*
 	public void damaged() { 
 		if (bomb.checkHitShip() == true) { 
 			damaged = true;
@@ -98,3 +97,4 @@ public class PlayerShip {
 	}
 	
 }
+*/

@@ -17,7 +17,7 @@ public class Shot implements ActionListener {
 	public static final int MS = 50;
 	public static final int SPEED = 10;
 	private ArrayList <GOval> shots;
-	private ArrayList <Invaders> enemies;
+	//private ArrayList <Invaders> enemies;
 	public static Timer t;
 	private GObject s;
 	PlayerShip ship;

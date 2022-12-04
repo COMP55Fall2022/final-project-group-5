@@ -145,7 +145,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == invadersUpdateTimer) {
 			invaders.Move();
-			invaders.dropBomb();
+			invaders.setRandInv();
+			bomb.addABomb(invaders.getRandX(), invaders.getRandY());
 			if (invaders.getBound()) {
 				invadersUpdateTimer.stop();
 				invadersSpeed -= 25;
@@ -186,10 +187,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		if(gameStarted) {
+		if (gameStarted) {
 			player.keyPressed(e);
 			pause.keyPressed(e);
-			if( shot != null) {
+			if (shot != null) {
 				if (key == KeyEvent.VK_SPACE) {
 					shot.addAShot(player.getX(), player.getY());
 				}
