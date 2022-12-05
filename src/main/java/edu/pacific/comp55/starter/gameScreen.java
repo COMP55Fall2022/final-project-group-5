@@ -33,6 +33,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	private boolean gameStarted = false;
 	private Timer invadersUpdateTimer;
 	private int invadersSpeed = 300;
+	//private Timer bombTimer;
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
 		requestFocus();
