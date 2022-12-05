@@ -139,10 +139,11 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == invadersUpdateTimer) {
+		if(e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
 			invaders.Move();
 			invaders.setRandInv();
 			bombT++;
+			bomb.actionPerformed(e);
 			if (bombT == bombSPD) {
 				bomb.addABomb(invaders.getRandX() + 10, invaders.getRandY() + 5);
 				bombT = 0;
@@ -154,55 +155,71 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				bombSPD -= (bombSPD > 0) ? 1 : 0;
 				invadersUpdateTimer.start();
 			}
-			if (bomb.getArrSize() > 0) {
+			/*if (bomb.getArrSize() > 0) {
 				player.damaged(bomb.checkHitShip(player.getX(), player.getY()));
-			}
+			}*/
 		}
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (getElementAt(e.getX(), e.getY()) == start) {
-			System.out.println("start");
-			drawGame();
-		}
-		else if (getElementAt(e.getX(), e.getY()) == score) {
-			System.out.println("scoreboard");
-			drawScoreboard();
-		}
-		else if (getElementAt(e.getX(), e.getY()) == scoreboard.getExit()) {
-			System.out.println("scoreboard exit");
-			scoreboard.Exit();
-			drawMainMenu();
-		}
-		else if (getElementAt(e.getX(), e.getY()) == pause.getExit()) {
-			pause.removeDraw();
-			drawMainMenu();
-		}
-		else if (getElementAt(e.getX(), e.getY()) == pause.getResume()) {
-			pause.removeDraw();
+		if (!gameStarted) {
+			if (getElementAt(e.getX(), e.getY()) == start) {
+				System.out.println("start");
+				drawGame();
+			}
+			else if (getElementAt(e.getX(), e.getY()) == score) {
+				System.out.println("scoreboard");
+				drawScoreboard();
+			}
+			else if (getElementAt(e.getX(), e.getY()) == scoreboard.getExit()) {
+				System.out.println("scoreboard exit");
+				scoreboard.Exit();
+				drawMainMenu();
+			}
+			else {
+				System.out.println("nothing");
+			}
 		}
 		else {
-			System.out.println("nothing");
+			if (getElementAt(e.getX(), e.getY()) == pause.getExit()) {
+				pause.removeDraw();
+				player = null;
+				invaders = null;
+				shot = null;
+				pause = null;
+				bomb = null;
+				invadersUpdateTimer = null;
+				gameStarted = false;
+				drawMainMenu();
+			}
+			else if (getElementAt(e.getX(), e.getY()) == pause.getResume()) {
+				pause.removeDraw();
+				invadersUpdateTimer.start();
+				bomb.resumeBomb();
+			}
+			else {
+				System.out.println("nothing");
+			}
 		}
 	}
-	
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		if (gameStarted) {
+		if (gameStarted && invadersUpdateTimer.isRunning()) {
 			player.keyPressed(e);
-			pause.keyPressed(e);
+			if (pause.keyPressed(e)) {
+				invadersUpdateTimer.stop();
+				bomb.pauseBomb();
+			}
 			if (shot != null) {
 				if (key == KeyEvent.VK_SPACE) {
 					shot.addAShot(player.getX() + 19, player.getY() - 5);
 				}
 			}
 		}
-	}
-
-	
+	}	
 
 	public static void main(String[] args) {
 		new gameScreen().start();

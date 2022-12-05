@@ -20,7 +20,7 @@ public class Shot implements ActionListener {
 	//private ArrayList <Invaders> enemies;
 	public static Timer t;
 	private GObject s;
-	PlayerShip ship;
+	//PlayerShip ship;
 	GraphicsProgram gameScr; 
 	
 	public Shot(GraphicsProgram screen) {
@@ -29,7 +29,7 @@ public class Shot implements ActionListener {
 	}
 	
 	public void init() {
-		ship = new PlayerShip(gameScr);
+		//ship = new PlayerShip(gameScr);
 		shots = new ArrayList<GOval>();
 		System.out.println("shot run");
 		t = new Timer(50, this);

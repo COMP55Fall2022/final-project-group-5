@@ -12,7 +12,7 @@ import acm.program.GraphicsProgram;
 public class Bomb extends GraphicsProgram  {
 	public static final int SIZE = 30;
 	public static final int MS = 50;
-	public static final double SPEED = .5;
+	public static final double SPEED = 1;
 	private ArrayList <GRect> bombs;
 	private GObject temp;
 	public static Timer t;
@@ -54,6 +54,15 @@ public class Bomb extends GraphicsProgram  {
 	public int getArrSize() {
 		return bombs.size();
 	}
+	
+	public void pauseBomb() {
+		t.stop();
+	}
+	
+	public void resumeBomb() {
+		t.start();
+	}
+	
 	public boolean checkHitShip(double pX, double pY) {
 		temp = getElementAt(pX, pY);
 		for (int i = 0; i < bombs.size(); i++) { // loop through enemies (rect)

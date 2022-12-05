@@ -76,13 +76,15 @@ public class PauseMenu {
 		gameScreenRef.remove(exitBox);
 	}
 	
-	public void keyPressed(KeyEvent e) {
+	public boolean keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_ESCAPE) {
 			Draw();
 			pauseGame = true;
 			System.out.println("pause");
+			return pauseGame;
 		}
+		return pauseGame;
 	}
 	
 	public void mousePressed(MouseEvent e) {

@@ -16,30 +16,31 @@ public class PlayerShip {
 	int START_X = 230;
 	int START_Y = 420;
 	//private Timer t;
-	GObject playerShip = new GImage("images/playerShip4.png", START_X, START_Y);
+	GObject playerShip; //= new GImage("images/playerShip4.png", START_X, START_Y);
 	GraphicsProgram gameScr; 
 	
 	public PlayerShip(GraphicsProgram screen) {
 		gameScr = screen;
+		playerShip = new GImage("images/playerShip4.png", START_X, START_Y);
 		gameScr.add(playerShip);
 	}
 	
-	private void setX(int x) {
-		this.x = x;
-	}
+	//private void setX(int x) {
+		//this.x = x;
+	//}
 	
-	private void setY(int y) {
-		this.y = y;
-	}
+	//private void setY(int y) {
+		//this.y = y;
+	//}
 	
-	public PlayerShip () {
-		initPlayerShip();
-	}
+	//public PlayerShip () {
+		//initPlayerShip();
+	//}
 	
-	public void initPlayerShip() {
-		setX(START_X);
-		setY(START_Y);
-	}
+	//public void initPlayerShip() {
+		//setX(START_X);
+		//setY(START_Y);
+	//}
 	
 	public double getX() {
 		return playerShip.getX();
@@ -49,20 +50,21 @@ public class PlayerShip {
 		return playerShip.getY();
 	}
 	
-	public void run() {
-		gameScr.add(playerShip);
-	}
+	//public void run() {
+		//gameScr.add(playerShip);
+	//}
 	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		
 		if (key == KeyEvent.VK_LEFT && playerShip.getX() > 0) {
 			playerShip.move(-5, 0);
-			
+			System.out.println("left");
 		}
 		
 		if (key == KeyEvent.VK_RIGHT && playerShip.getX()+playerShip.getWidth() + 15 < gameScr.getWidth()) {
 			playerShip.move(5, 0);
+			System.out.println("right");
 		}
 		
 	}
@@ -85,14 +87,11 @@ public class PlayerShip {
 	
 	public void damaged(boolean damaged) { 
 		if (damaged) { 
-			damaged = true;
 			life.deleteImage();
 		}
-		
-		/*if (damaged = true) {
+		if (damaged) {
 			playerShip.setVisible(false);
 		}
-		*/
 	}
 	
 }
