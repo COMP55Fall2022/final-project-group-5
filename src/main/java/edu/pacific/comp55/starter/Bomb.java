@@ -14,6 +14,10 @@ public class Bomb extends GraphicsProgram  {
 	public static final int MS = 50;
 	public static final double SPEED = 1;
 	private ArrayList <GRect> bombs;
+	public ArrayList<GRect> getBombs() {
+		return bombs;
+	}
+
 	private GObject temp;
 	public static Timer t;
 	GraphicsProgram gameScr; 

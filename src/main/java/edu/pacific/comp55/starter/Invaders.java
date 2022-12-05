@@ -21,6 +21,11 @@ public class Invaders {
 	double randY = 0;
 	boolean reachedBound = false;
 	ArrayList<GImage> invaders;
+	
+	public ArrayList<GImage> getInvaders() {
+		return invaders;
+	}
+
 	GraphicsProgram gameScr; 
 	
 	public Invaders(GraphicsProgram screen) {
