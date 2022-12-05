@@ -1,57 +1,79 @@
 package edu.pacific.comp55.starter;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import javax.swing.Timer;
 
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
-public class Bomb extends GraphicsProgram {
-	private int x;
-	private int y;
-	private boolean destroyed;
-	GRect bomb = new GRect(63, 75, 3, 10);
+public class Bomb extends GraphicsProgram  {
+	public static final int SIZE = 30;
+	public static final int MS = 50;
+	public static final double SPEED = 1;
+	private ArrayList <GRect> bombs;
+	private GObject temp;
+	public static Timer t;
 	GraphicsProgram gameScr; 
 	public Bomb(GraphicsProgram screen) {
 		gameScr = screen;
+		run();
 	}
-
-	public void createBomb(int x2, int y2) {
-		initBomb(x, y);
+	
+	public void run() {
+		bombs = new ArrayList<GRect>();
+		t = new Timer(10, this);
+		t.start();
 	}
-
-	public Bomb() {
-		
-	}
-
-	private void initBomb(int x, int y) {
-		this.x = x;
-		this.y = y;
-		Invaders(true);
-		bomb.setColor(Color.GRAY);
-		bomb.setFilled(true);
+	
+	public void addABomb(double x, double y) {
+		GRect bomb = makeBomb(x, y);
 		gameScr.add(bomb);
+		bombs.add(bomb);
 	}
-	private void Invaders(boolean destroyed) {
-		this.destroyed = destroyed;
+	
+	public GRect makeBomb(double x, double y) {
+		GRect temp = new GRect(x, y, 3, 10);
+		temp.setColor(Color.GRAY);
+		temp.setFilled(true);
+		return temp;
 	}
-		public boolean isDestroyed() {
-			return destroyed;
-		}
-
-		public void run() {
-			add(bomb);
-			
-		}
-		public static void main(String[] args) {
-			new Bomb().start();
-		}
-
-		public boolean checkHitShip() {
-			// TODO Auto-generated method stub
-			return false;
-		}
-		
+	
+	public void actionPerformed(ActionEvent e) {
+		moveAllBombsOnce();
 	}
+	
+	private void moveAllBombsOnce() {
+		for(GRect bomb: bombs) {
+			bomb.move(0, SPEED);
+		}
+	}
+	
+	public int getArrSize() {
+		return bombs.size();
+	}
+	
+	public void pauseBomb() {
+		t.stop();
+	}
+	
+	public void resumeBomb() {
+		t.start();
+	}
+	
+	public boolean checkHitShip(double pX, double pY) {
+		temp = getElementAt(pX, pY);
+		for (int i = 0; i < bombs.size(); i++) { // loop through enemies (rect)
+			if (bombs.get(i) == temp) { // if rect is equivalent to the ball's spot (x,y)
+				remove(bombs.get(i)); // remove rect on the window run display
+				bombs.remove(i);	// removes actual rect in array list
+				return true;
+			}
+		}
+		return false;
+	}
+}
 
 //comment

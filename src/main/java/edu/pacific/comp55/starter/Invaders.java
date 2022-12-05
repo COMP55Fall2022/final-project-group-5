@@ -1,4 +1,8 @@
 package edu.pacific.comp55.starter;
+import java.awt.event.ActionEvent;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 import acm.graphics.GImage;
 import acm.graphics.GObject;
@@ -6,52 +10,109 @@ import acm.program.GraphicsProgram;
 
 
 public class Invaders {
-	private Bomb bomb;
+	private static final int MOVE_RANGE = 32;
 	int x;
 	int y;
-	int start_x = 50;
+	int start_x = 0;
 	int start_y = 50;
-	GObject invaders = new GImage("media/new invaders resize.PNG", start_x, start_y);
+	double invX, invY;
+	int moveRange = MOVE_RANGE;
+	double randX = 0;
+	double randY = 0;
+	boolean reachedBound = false;
+	ArrayList<GImage> invaders;
 	GraphicsProgram gameScr; 
 	
 	public Invaders(GraphicsProgram screen) {
 		gameScr = screen;
-		gameScr.add(invaders);
+		invaders = new ArrayList<GImage>();
 	}
 	
-	public Invaders() {
+	public void run() {
 		initInvaders();
+		for (GObject invader : invaders) {
+			System.out.println("add");
+			gameScr.add(invader);
+		}
 	}
+
 	private void initInvaders() {
-		setX(start_x);
-		setY(start_y);
-		//bomb = new Bomb(x, y);
+		System.out.println("create");
+		for (int i = 0; i < 7; i++) {
+			for (int j = 0; j < 3; j++) {
+				invaders.add(new GImage("media/new invaders resize.PNG", start_x + (i*50), start_y + (j*50)));
+			}
+		}
 	}
+
+	public void Move() {
+		
+		int dx = (moveRange > 1) ? 5 : -5;
+		int dy = (moveRange == 2 || moveRange == -2) ? 20 : 0;
+		
+		moveRange += (moveRange > 1) ? -1 : 1;
+		
+		if (moveRange == 1) {
+			moveRange = -1 * MOVE_RANGE;
+			reachedBound = true;
+		} else 
+		if (moveRange == -1) {
+			moveRange = MOVE_RANGE;
+			reachedBound = true;
+		} else {
+			reachedBound = false;
+		}
+		
+		for (GObject inv: invaders) {
+			inv.move(dx, dy);
+			setX(dx);
+			setY(dy);
+		}
+	}
+	
 	private void setX(int x) {
 		this.x = x;
 	}
+	
 	private void setY(int y) {
 		this.y = y;
 	}
 	
-	public double getX() {
-		return invaders.getX();
+	
+	public int getX() {
+		return x;
 	}
 	
-	public double getY() {
-		return invaders.getY();
+	public int getY() {
+		return x;
 	}
 	
-	public Bomb getBomb() {
-		return bomb;	
-		}
-	
-	public void run() {
-		gameScr.add(invaders);
+	public void setRandInv() {
+		var generator = new Random();
+		int index = generator.nextInt(invaders.size());
+		this.randX = invaders.get(index).getX();
+		this.randY = invaders.get(index).getY();
 	}
-}
+	
+	public double getRandX() {
+		return randX;
+	}
+	
+	public double getRandY() {
+		return randY;
+	}
+	
+	public boolean getBound() {
+		return reachedBound;
+	}
+	
+//	public void bombRand() {
+		//setLocation(x, y, + MOVE_RANGE);
+//	}
+
+//	private void setLocation(int x, int y, int i) {
 		
+//	}
+}
+
 	//comment
-
-
-

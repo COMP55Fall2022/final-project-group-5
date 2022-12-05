@@ -2,21 +2,14 @@ package edu.pacific.comp55.starter;
 
 import acm.program.*;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import javax.swing.Timer;
 
 import acm.graphics.*;
-import acm.util.*;
-import java.awt.*;
 import java.awt.event.*;
-
-
-import org.apache.commons.math3.analysis.function.Add;
 
 public class gameScreen extends GraphicsProgram implements ActionListener{
 	
@@ -30,9 +23,12 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	private PlayerShip player;
 	private PauseMenu pause;
 	private Shot shot;
+	private int bombT = 0;
+	private int bombSPD = 10;
 	private boolean gameStarted = false;
 	private Timer invadersUpdateTimer;
-	
+	private int invadersSpeed = 300;
+	//private Timer bombTimer;
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
 		requestFocus();
@@ -127,12 +123,14 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 		
 		player = new PlayerShip(this);
 		invaders = new Invaders(this);
+		shot = new Shot(this);
 		pause = new PauseMenu(this);
 		gameStarted = true;
 		bomb = new Bomb(this);
-		bomb.createBomb(120, 200);
-		invadersUpdateTimer = new Timer(100, this);
+		invadersUpdateTimer = new Timer(invadersSpeed, this);
 		invadersUpdateTimer.start();
+		
+		invaders.run();
 	}
 	
 	private void drawScoreboard() {
@@ -141,51 +139,88 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if( e.getSource() == invadersUpdateTimer) {
-			//invaders.
+		if(e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
+			invaders.Move();
+			invaders.setRandInv();
+			bombT++;
+			bomb.actionPerformed(e);
+			if (bombT == bombSPD) {
+				bomb.addABomb(invaders.getRandX() + 10, invaders.getRandY() + 5);
+				bombT = 0;
+			}
+			if (invaders.getBound()) {
+				invadersUpdateTimer.stop();
+				invadersSpeed -= 25;
+				invadersUpdateTimer = new Timer(invadersSpeed, this);
+				bombSPD -= (bombSPD > 0) ? 1 : 0;
+				invadersUpdateTimer.start();
+			}
+			/*if (bomb.getArrSize() > 0) {
+				player.damaged(bomb.checkHitShip(player.getX(), player.getY()));
+			}*/
 		}
 	}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
-		if (getElementAt(e.getX(), e.getY()) == start) {
-			System.out.println("start");
-			drawGame();
-		}
-		else if (getElementAt(e.getX(), e.getY()) == score) {
-			System.out.println("scoreboard");
-			drawScoreboard();
-		}
-		else if (getElementAt(e.getX(), e.getY()) == scoreboard.getExit()) {
-			System.out.println("scoreboard exit");
-			scoreboard.Exit();
-			drawMainMenu();
-		}
-		else if (getElementAt(e.getX(), e.getY()) == pause.getExit()) {
-			pause.removeDraw();
-			drawMainMenu();
-		}
-		else if (getElementAt(e.getX(), e.getY()) == pause.getResume()) {
-			pause.removeDraw();
+		if (!gameStarted) {
+			if (getElementAt(e.getX(), e.getY()) == start) {
+				System.out.println("start");
+				drawGame();
+			}
+			else if (getElementAt(e.getX(), e.getY()) == score) {
+				System.out.println("scoreboard");
+				drawScoreboard();
+			}
+			else if (getElementAt(e.getX(), e.getY()) == scoreboard.getExit()) {
+				System.out.println("scoreboard exit");
+				scoreboard.Exit();
+				drawMainMenu();
+			}
+			else {
+				System.out.println("nothing");
+			}
 		}
 		else {
-			System.out.println("nothing");
-		}
-	}
-	
-	
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if(gameStarted) {
-			player.keyPressed(e);
-			pause.keyPressed(e);
-			if( shot != null) {
-				shot.keyPressed(e);
+			if (getElementAt(e.getX(), e.getY()) == pause.getExit()) {
+				pause.removeDraw();
+				player = null;
+				invaders = null;
+				shot = null;
+				pause = null;
+				bomb = null;
+				invadersUpdateTimer = null;
+				gameStarted = false;
+				drawMainMenu();
+			}
+			else if (getElementAt(e.getX(), e.getY()) == pause.getResume()) {
+				pause.removeDraw();
+				invadersUpdateTimer.start();
+				bomb.resumeBomb();
+				pause.setPause();
+			}
+			else {
+				System.out.println("nothing");
 			}
 		}
 	}
-
 	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
+		if (gameStarted && invadersUpdateTimer.isRunning()) {
+			player.keyPressed(e);
+			if (pause.keyPressed(e)) {
+				invadersUpdateTimer.stop();
+				bomb.pauseBomb();
+			}
+			if (shot != null) {
+				if (key == KeyEvent.VK_SPACE) {
+					shot.addAShot(player.getX() + 19, player.getY() - 5);
+				}
+			}
+		}
+	}	
 
 	public static void main(String[] args) {
 		new gameScreen().start();
