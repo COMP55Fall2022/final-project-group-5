@@ -139,7 +139,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == invadersUpdateTimer) {
+		if(e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
 			invaders.Move();
 			invaders.setRandInv();
 			bombT++;
@@ -155,26 +155,18 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				bombSPD -= (bombSPD > 0) ? 1 : 0;
 				invadersUpdateTimer.start();
 			}
-			
-			//check shot collision
-			
-			for(GOval sh :shot.getShots()) {
-				for (GImage inv: invaders.getInvaders()) {
-					
-				}
-			}
-			
-			for(GRect b:bomb.getBombs()) {
-				
-			}
-			
-			//check bomb collision
+			checkCollisions();
 			/*if (bomb.getArrSize() > 0) {
 				player.damaged(bomb.checkHitShip(player.getX(), player.getY()));
 			}*/
 		}
 	}
 	
+	public void checkCollisions() {
+		// var gameEnd = new (0, 420);
+		
+	}
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (!gameStarted) {
@@ -211,7 +203,6 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				pause.removeDraw();
 				invadersUpdateTimer.start();
 				bomb.resumeBomb();
-				shot.resumeShots();
 				pause.setPause();
 			}
 			else {
@@ -228,7 +219,6 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 			if (pause.keyPressed(e)) {
 				invadersUpdateTimer.stop();
 				bomb.pauseBomb();
-				shot.stopShots();
 			}
 			if (shot != null) {
 				if (key == KeyEvent.VK_SPACE) {
