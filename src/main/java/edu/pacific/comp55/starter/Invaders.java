@@ -88,6 +88,14 @@ public class Invaders {
 	public boolean getBound() {
 		return reachedBound;
 	}
+	
+//	public void bombRand() {
+		//setLocation(x, y, + MOVE_RANGE);
+//	}
+
+//	private void setLocation(int x, int y, int i) {
+		
+//	}
 }
 
 	//comment

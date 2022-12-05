@@ -20,6 +20,7 @@ public class Bomb extends GraphicsProgram {
 		gameScr = screen;
 		run();
 	}
+	
 	public void run() {
 		bombs = new ArrayList<GRect>();
 		t = new Timer(10, this);
