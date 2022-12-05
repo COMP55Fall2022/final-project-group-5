@@ -66,36 +66,7 @@ public class Boss extends GraphicsProgram {
 	public int getY() {
 		return y;
 	}
-	/*
-
-	public Boss(GraphicsProgram screen) {
-		gameScr = screen;
-		gameScr.add(Boss);
-	}
 	
-	public Boss() {
-		initBoss();
-	}
-	private void initBoss() {
-		setX(start_x);
-		setY(start_y);
-	}
-		
-		private void setX(int x) {
-			this.x = x;
-		}
-		private void setY(int y) {
-			this.y = y;
-		}
-           
-		public double getX() {
-			return Boss.getX();
-		}
-		
-		public double getY() {
-			return Boss.getY();
-		}
-		*/
 		
 		public Bomb getBomb() {
 			return bomb;	
