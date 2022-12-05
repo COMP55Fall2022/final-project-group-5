@@ -2,21 +2,14 @@ package edu.pacific.comp55.starter;
 
 import acm.program.*;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 
 import javax.swing.Timer;
 
 import acm.graphics.*;
-import acm.util.*;
-import java.awt.*;
 import java.awt.event.*;
-
-
-import org.apache.commons.math3.analysis.function.Add;
 
 public class gameScreen extends GraphicsProgram implements ActionListener{
 	
