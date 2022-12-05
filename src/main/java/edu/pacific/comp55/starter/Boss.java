@@ -28,6 +28,7 @@ public class Boss {
 	private void initBoss() {
 		setX(start_x);
 		setY(start_y);
+	}
 		
 		private void setX(int x) {
 			this.x = x;
@@ -44,6 +45,13 @@ public class Boss {
 			return Boss.getY();
 		}
 		
+		public Bomb getBomb() {
+			return bomb;	
+			}
+		
+		public void run() {
+			gameScr.add(Boss);
+		}
 	}
 	
 	
