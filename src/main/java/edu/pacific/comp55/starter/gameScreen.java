@@ -197,6 +197,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				pause.removeDraw();
 				invadersUpdateTimer.start();
 				bomb.resumeBomb();
+				pause.setPause();
 			}
 			else {
 				System.out.println("nothing");

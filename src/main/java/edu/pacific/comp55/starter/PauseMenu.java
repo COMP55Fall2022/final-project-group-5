@@ -76,6 +76,10 @@ public class PauseMenu {
 		gameScreenRef.remove(exitBox);
 	}
 	
+	public void setPause() {
+		pauseGame = false;
+	}
+	
 	public boolean keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
 		if (key == KeyEvent.VK_ESCAPE) {
