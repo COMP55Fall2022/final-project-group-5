@@ -65,16 +65,33 @@ public class Invaders {
 		
 		for (GObject inv: invaders) {
 			inv.move(dx, dy);
+			setX(dx);
+			setY(dy);
 		}
 	}
 	
+	private void setX(int x) {
+		this.x = x;
+	}
 	
+	private void setY(int y) {
+		this.y = y;
+	}
+	
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return x;
+	}
 	
 	public void setRandInv() {
 		var generator = new Random();
 		int index = generator.nextInt(invaders.size());
-		this.randX = invaders.get(index).getWidth();
-		this.randY = invaders.get(index).getHeight();
+		this.randX = invaders.get(index).getX();
+		this.randY = invaders.get(index).getY();
 	}
 	
 	public double getRandX() {

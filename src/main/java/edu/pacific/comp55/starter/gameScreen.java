@@ -30,6 +30,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	private PlayerShip player;
 	private PauseMenu pause;
 	private Shot shot;
+	private int bombT = 0;
+	private int bombSPD = 10;
 	private boolean gameStarted = false;
 	private Timer invadersUpdateTimer;
 	private int invadersSpeed = 300;
@@ -146,12 +148,20 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 		if(e.getSource() == invadersUpdateTimer) {
 			invaders.Move();
 			invaders.setRandInv();
-			bomb.addABomb(invaders.getRandX(), invaders.getRandY());
+			bombT++;
+			if (bombT == bombSPD) {
+				bomb.addABomb(invaders.getRandX() + 10, invaders.getRandY() + 5);
+				bombT = 0;
+			}
 			if (invaders.getBound()) {
 				invadersUpdateTimer.stop();
 				invadersSpeed -= 25;
 				invadersUpdateTimer = new Timer(invadersSpeed, this);
+				bombSPD -= (bombSPD > 0) ? 1 : 0;
 				invadersUpdateTimer.start();
+			}
+			if (bomb.getArrSize() > 0) {
+				player.damaged(bomb.checkHitShip(player.getX(), player.getY()));
 			}
 		}
 	}
