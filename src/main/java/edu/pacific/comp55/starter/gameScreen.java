@@ -160,7 +160,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 			
 			for(GOval sh :shot.getShots()) {
 				for (GImage inv: invaders.getInvaders()) {
-					
+				//	if (invDy == sh.getHeight()) {
+					//	remove(in);
+						//Intersects.
+					}
 				}
 			}
 			
@@ -173,7 +176,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				player.damaged(bomb.checkHitShip(player.getX(), player.getY()));
 			}*/
 		}
-	}
+	//}
 	
 	@Override
 	public void mousePressed(MouseEvent e) {

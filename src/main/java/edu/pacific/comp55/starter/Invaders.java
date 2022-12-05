@@ -111,6 +111,10 @@ public class Invaders {
 		return reachedBound;
 	}
 	
+	public void removeInv() {
+		
+	}
+	
 //	public void bombRand() {
 		//setLocation(x, y, + MOVE_RANGE);
 //	}

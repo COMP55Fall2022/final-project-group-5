@@ -61,6 +61,7 @@ public class Shot implements ActionListener {
 		temp.setColor(Color.WHITE);
 		temp.setFilled(true);
 		shots.add(temp);
+		// AudioPlayer
 		return temp;
 	}
 	
