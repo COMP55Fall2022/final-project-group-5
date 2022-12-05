@@ -21,6 +21,11 @@ public class Invaders {
 	double randY = 0;
 	boolean reachedBound = false;
 	ArrayList<GImage> invaders;
+	
+	public ArrayList<GImage> getInvaders() {
+		return invaders;
+	}
+
 	GraphicsProgram gameScr; 
 	
 	public Invaders(GraphicsProgram screen) {
@@ -105,14 +110,14 @@ public class Invaders {
 	public boolean getBound() {
 		return reachedBound;
 	}
-	
-//	public void bombRand() {
-		//setLocation(x, y, + MOVE_RANGE);
-//	}
-
-//	private void setLocation(int x, int y, int i) {
-		
-//	}
+	public boolean checkCollisions() {
+		for (GImage inv : getInvaders()) {
+			if (inv.getY() == 420) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 	//comment

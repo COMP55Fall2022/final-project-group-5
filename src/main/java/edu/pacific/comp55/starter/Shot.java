@@ -70,6 +70,18 @@ public class Shot implements ActionListener {
 		}
 	}
 	
+	public void stopShots() {
+		t.stop();
+	}
+	
+	public void resumeShots() {
+		t.start();
+	}
+
+	public ArrayList<GOval> getShots() {
+		return shots;
+	}
+	
 //	private void removeShot() {
 //		for(GOval shot: shots) {
 //			for(Invaders enemy: enemies) {

@@ -155,12 +155,14 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				bombSPD -= (bombSPD > 0) ? 1 : 0;
 				invadersUpdateTimer.start();
 			}
-			/*if (bomb.getArrSize() > 0) {
-				player.damaged(bomb.checkHitShip(player.getX(), player.getY()));
-			}*/
+			if (invaders.checkCollisions()) {
+				// game over screen
+			}
 		}
 	}
 	
+
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (!gameStarted) {
