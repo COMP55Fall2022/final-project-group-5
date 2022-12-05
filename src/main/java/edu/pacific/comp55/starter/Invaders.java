@@ -110,6 +110,14 @@ public class Invaders {
 	public boolean getBound() {
 		return reachedBound;
 	}
+	public boolean checkCollisions() {
+		for (GImage inv : getInvaders()) {
+			if (inv.getY() == 420) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 	//comment
