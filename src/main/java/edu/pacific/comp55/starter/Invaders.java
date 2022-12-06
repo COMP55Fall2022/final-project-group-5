@@ -110,18 +110,19 @@ public class Invaders {
 	public boolean getBound() {
 		return reachedBound;
 	}
+
 	
 	public void removeInv() {
 		
 	}
-	
-//	public void bombRand() {
-		//setLocation(x, y, + MOVE_RANGE);
-//	}
 
-//	private void setLocation(int x, int y, int i) {
-		
-//	}
-}
+	public boolean checkCollisions() {
+		for (GImage inv : getInvaders()) {
+			if (inv.getY() == 420) {
+				return true;
+			}
+		}
+		return false;
+	}}
 
 	//comment
