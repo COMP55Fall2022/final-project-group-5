@@ -33,6 +33,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	private boolean gameStarted = false;
 	private Timer invadersUpdateTimer;
 	private int invadersSpeed = 300;
+	private int numLives = 0;
 	//private Timer bombTimer;
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
@@ -110,6 +111,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 		removeAll();
 		addBackground();
 		
+		numLives = 3; 
+		
 		GLabel lives = new GLabel("Lives: ", 300, 20); 
 		lives.setFont("Arial-Bold-18");
 		lives.setColor(Color.WHITE);
@@ -144,46 +147,79 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
-			invaders.Move();
-			bombT++;
-			bomb.actionPerformed(e);
-			if (bombT == bombSPD) {
-				invaders.setRandInv();
-				bomb.addABomb(invaders.getRandX() + 10, invaders.getRandY() + 5);
-				bombT = 0;
+		if (e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
+			if (invaders.getDeaths()) {
+				player = null;
+				invaders = null;
+				shot = null;
+				pause = null;
+				bomb = null;
+				invadersUpdateTimer = null;
+				gameStarted = false;
+				drawMainMenu();
+				return;
 			}
-			if (invaders.getBound()) {
-				invadersUpdateTimer.stop();
-				invadersSpeed -= 25;
-				invadersUpdateTimer = new Timer(invadersSpeed, this);
-				bombSPD -= (bombSPD > 0) ? 1 : 0;
-				invadersUpdateTimer.start();
-			}
-			//check shot collision
-			
-			for (GOval sh :shot.getShots()) {
-				Rectangle temp1 = new Rectangle();
-				temp1.setBounds((int)sh.getX(), (int)sh.getY(), (int)sh.getWidth(), (int)sh.getHeight());
-				//sh.getX(), sh.getY(), sh.getWidth(), sh.getHeight()
-				for(GImage inv : invaders.getInvaders()) {
+			else {
+				invaders.Move();
+				bombT++;
+				bomb.actionPerformed(e);
+				if (bombT == bombSPD) {
+					invaders.setRandInv();
+					bomb.addABomb(invaders.getRandX() + 10, invaders.getRandY() + 5);
+					bombT = 0;
+				}
+				if (invaders.getBound()) {
+					invadersUpdateTimer.stop();
+					invadersSpeed -= 25;
+					invadersUpdateTimer = new Timer(invadersSpeed, this);
+					bombSPD -= (bombSPD > 0) ? 1 : 0;
+					invadersUpdateTimer.start();
+				}
+				//check shot collision
+				
+				for (GOval sh :shot.getShots()) {
+					Rectangle temp1 = new Rectangle();
+					temp1.setBounds((int)sh.getX(), (int)sh.getY(), (int)sh.getWidth(), (int)sh.getHeight());
+					for(GImage inv : invaders.getInvaders()) {
+						Rectangle temp2 = new Rectangle();
+						temp2.setBounds((int)inv.getX(), (int)inv.getY(), (int)inv.getWidth(), (int)inv.getHeight());
+						if (temp1.intersects(temp2) && sh.isVisible() && inv.isVisible()) {
+							if (inv.isVisible()) {
+								invaders.incrementDeaths();
+								inv.setVisible(false);
+								sh.setVisible(false);
+							}
+						}
+					}	
+				}
+				
+				for (GRect bomb : bomb.getBombs()) {
+					Rectangle temp1 = new Rectangle();
+					temp1.setBounds((int)bomb.getX(), (int)bomb.getY(), (int)bomb.getWidth(), (int)bomb.getHeight());
 					Rectangle temp2 = new Rectangle();
-					temp2.setBounds((int)inv.getX(), (int)inv.getY(), (int)inv.getWidth(), (int)inv.getHeight());
-					if (temp1.intersects(temp2) && sh.isVisible() && inv.isVisible()) {
-						if (inv.isVisible()) {
-							inv.setVisible(false);
-							sh.setVisible(false);
+					temp2.setBounds((int)player.getX(), (int)player.getY(), player.getW(), player.getH());
+					if (temp1.intersects(temp2) && player.isVisible() && bomb.isVisible()) { 
+						numLives--;
+						player.damaged(true, numLives);
+						life.deleteImage();
+						bomb.setVisible(false);
+						if (numLives == 0) {
+							player = null;
+							invaders = null;
+							shot = null;
+							pause = null;
+							bomb = null;
+							invadersUpdateTimer = null;
+							gameStarted = false;
+							drawMainMenu();
+							return;
 						}
 					}
-				}	
-			}
-			
-			for (GImage inv : invaders.getInvaders()) {
-				if (inv.getX() >= player.getX() && inv.getX() <= (player.getX() + 30) && inv.getY() >= player.getY() && inv.getY() <= (player.getY() + 23) && inv.isVisible()) { 
-					player.damaged(true);
 				}
+				
+				
 			}
-			}
+		}
 /*
 			if (invaders.checkCollisions()) {
 				// game over screen

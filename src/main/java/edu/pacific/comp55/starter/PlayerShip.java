@@ -81,17 +81,29 @@ public class PlayerShip {
 		}
 	}
 	
-	public void revive() { 
+	private void revive() { 
 		playerShip.setVisible(true);
 	}
 	
-	public void damaged(boolean damaged) { 
-		if (damaged) { 
-			life.deleteImage();
-		}
+	public void damaged(boolean damaged, int lives) { 
 		if (damaged) {
 			playerShip.setVisible(false);
+			if (lives > 0) {
+				revive();
+			}
 		}
+	}
+
+	public boolean isVisible() {
+		return playerShip.isVisible();
+	}
+	
+	public int getH() {
+		return (int) playerShip.getHeight();
+	}
+	
+	public int getW() {
+		return (int) playerShip.getWidth();
 	}
 	
 }

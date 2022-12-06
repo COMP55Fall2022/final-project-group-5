@@ -35,6 +35,8 @@ public class Lives extends GraphicsProgram {
 	}
 	
 	public void deleteImage() {
+		int index = Lives.size() - 1;
+		gamescreenRef.remove(Lives.get(index));
 		Lives.remove(Lives.size()-1);
 	}
 	

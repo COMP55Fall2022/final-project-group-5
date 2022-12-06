@@ -16,6 +16,21 @@ public class Invaders {
 	int start_x = 0;
 	int start_y = 50;
 	double invX, invY;
+	private int deaths = 0;
+	
+	public boolean getDeaths() {
+		if (deaths == 21) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void incrementDeaths() {
+		deaths++;
+	}
+
 	int moveRange = MOVE_RANGE;
 	double randX = 0;
 	double randY = 0;
@@ -27,6 +42,7 @@ public class Invaders {
 	}
 
 	GraphicsProgram gameScr; 
+	
 	
 	public Invaders(GraphicsProgram screen) {
 		gameScr = screen;
