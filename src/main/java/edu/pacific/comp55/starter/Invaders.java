@@ -97,7 +97,15 @@ public class Invaders {
 	
 	public void setRandInv() {
 		var generator = new Random();
+		boolean visible = false;
 		int index = generator.nextInt(invaders.size());
+		while (!visible) {
+			if (invaders.get(index).isVisible()) {
+				visible = true;
+				break;
+			}
+			index = generator.nextInt(invaders.size());
+		}
 		this.randX = invaders.get(index).getX();
 		this.randY = invaders.get(index).getY();
 	}
@@ -117,7 +125,7 @@ public class Invaders {
 	
 	public void removeInv(double x, double y) {
 		for (int i = 0; i < invaders.size(); i++) {
-			if (invaders.get(i).getX() == x && invaders.get(i).getY() == y) {
+			if (invaders.get(i).getX() == x && invaders.get(i).getY() == y && invaders.get(i).isVisible()) {
 				gameScr.remove(invaders.get(i));
 				invaders.remove(i);
 				System.out.println("delete");

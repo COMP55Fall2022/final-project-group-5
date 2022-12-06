@@ -10,7 +10,7 @@ import javax.swing.Timer;
 public class PlayerShip {
 	private Lives life;
 	//private Bomb bomb;
-	boolean damaged;
+	boolean damaged = false;
 	int x;
 	int y;
 	int START_X = 230;

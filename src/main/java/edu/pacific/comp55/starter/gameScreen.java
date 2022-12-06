@@ -1,7 +1,12 @@
 package edu.pacific.comp55.starter;
 
 import acm.program.*;
+
 import java.awt.Color;
+
+
+import java.awt.Rectangle;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -141,10 +146,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
 			invaders.Move();
-			invaders.setRandInv();
 			bombT++;
 			bomb.actionPerformed(e);
 			if (bombT == bombSPD) {
+				invaders.setRandInv();
 				bomb.addABomb(invaders.getRandX() + 10, invaders.getRandY() + 5);
 				bombT = 0;
 			}
@@ -157,15 +162,28 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 			}
 			//check shot collision
 			
-			for(GOval sh :shot.getShots()) {
-				for (GImage inv: invaders.getInvaders()) {
-					if (sh.getX() >= inv.getX() && sh.getX() <= (inv.getX() + 30) && sh.getY() >= inv.getY() && sh.getY() <= (inv.getY() + 23)) {
-						invaders.removeInv(inv.getX(), inv.getY());
-						shot.removeShot(sh.getX(), sh.getY());
+			for (GOval sh :shot.getShots()) {
+				Rectangle temp1 = new Rectangle();
+				temp1.setBounds((int)sh.getX(), (int)sh.getY(), (int)sh.getWidth(), (int)sh.getHeight());
+				//sh.getX(), sh.getY(), sh.getWidth(), sh.getHeight()
+				for(GImage inv : invaders.getInvaders()) {
+					Rectangle temp2 = new Rectangle();
+					temp2.setBounds((int)inv.getX(), (int)inv.getY(), (int)inv.getWidth(), (int)inv.getHeight());
+					if (temp1.intersects(temp2) && sh.isVisible() && inv.isVisible()) {
+						if (inv.isVisible()) {
+							inv.setVisible(false);
+							sh.setVisible(false);
+						}
 					}
 				}	
 			}
-		}
+			
+			for (GImage inv : invaders.getInvaders()) {
+				if (inv.getX() >= player.getX() && inv.getX() <= (player.getX() + 30) && inv.getY() >= player.getY() && inv.getY() <= (player.getY() + 23) && inv.isVisible()) { 
+					player.damaged(true);
+				}
+			}
+			}
 /*
 			if (invaders.checkCollisions()) {
 				// game over screen

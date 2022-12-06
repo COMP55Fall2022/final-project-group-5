@@ -16,6 +16,7 @@ public class Shot implements ActionListener {
 	public static final int SIZE = 10;
 	public static final int MS = 50;
 	public static final int SPEED = 10;
+	private AudioPlayer audio;
 	private ArrayList <GOval> shots;
 	public static Timer t;
 	GraphicsProgram gameScr; 
@@ -40,6 +41,8 @@ public class Shot implements ActionListener {
 	public void addAShot(double x, double y) {
 		GOval shot = makeShot(x, y);
 		System.out.println("shot count");
+		//audio.getInstance()
+		//audio.playSound("src/main/resources", "video.mp4");
 		gameScr.add(shot);
 //		shots.add(shot);
 	}

@@ -24,7 +24,7 @@ public class Boss extends GraphicsProgram {
 	int start_x = 250;
 	int start_y = 250;
 	private Timer invadersUpdateTimer;
-	private int invadersSpeed = 300;
+	private int invadersSpeed = 100;
 	GObject Boss;
 	GraphicsProgram gameScr; 
 	
