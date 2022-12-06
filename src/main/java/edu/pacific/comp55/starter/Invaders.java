@@ -46,6 +46,8 @@ public class Invaders {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 3; j++) {
 				invaders.add(new GImage("media/new invaders resize.PNG", start_x + (i*50), start_y + (j*50)));
+				setX(start_x + (i*50));
+				setY(start_y + (j*50));
 			}
 		}
 	}
@@ -74,6 +76,7 @@ public class Invaders {
 			setY(dy);
 		}
 	}
+	
 	
 	private void setX(int x) {
 		this.x = x;
@@ -112,8 +115,15 @@ public class Invaders {
 	}
 
 	
-	public void removeInv() {
-		
+	public void removeInv(double x, double y) {
+		for (int i = 0; i < invaders.size(); i++) {
+			if (invaders.get(i).getX() == x && invaders.get(i).getY() == y) {
+				gameScr.remove(invaders.get(i));
+				invaders.remove(i);
+				System.out.println("delete");
+				return;
+			}
+		}
 	}
 
 	public boolean checkCollisions() {

@@ -5,7 +5,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-
+import java.applet.*;
 import javax.swing.Timer;
 
 import acm.graphics.*;
@@ -159,18 +159,18 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 			
 			for(GOval sh :shot.getShots()) {
 				for (GImage inv: invaders.getInvaders()) {
-				//	if (invDy == sh.getHeight()) {
-					//	remove(in);
-						//Intersects.
+					if (sh.getX() >= inv.getX() && sh.getX() <= (inv.getX() + 30) && sh.getY() >= inv.getY() && sh.getY() <= (inv.getY() + 23)) {
+						invaders.removeInv(inv.getX(), inv.getY());
+						shot.removeShot(sh.getX(), sh.getY());
 					}
-				}
-
-			if (invaders.checkCollisions()) {
-				// game over screen
+				}	
 			}
 		}
+/*
+			if (invaders.checkCollisions()) {
+				// game over screen
+			}*/
 	}
-	
 
 
 	@Override
