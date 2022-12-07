@@ -1,5 +1,6 @@
 package edu.pacific.comp55.starter;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 
@@ -12,8 +13,7 @@ import acm.program.GraphicsProgram;
 
 
 
-public class Boss extends GraphicsProgram {
-	//private Bomb bomb;
+public class Boss {
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
 	private static final int boss1Size = 125;
@@ -25,38 +25,62 @@ public class Boss extends GraphicsProgram {
 	int start_y = 250;
 	private Timer invadersUpdateTimer;
 	private int invadersSpeed = 100;
-	GObject Boss;
-	GraphicsProgram gameScr; 
 	
-	public void init() {
-		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
-		requestFocus();
-	}
-	
-	public static void main(String args[]) {
-		new Boss().start();
+	public int getInvadersSpeed() {
+		return invadersSpeed;
 	}
 
-	@Override
-	public void run() {
-		Boss = new GRect(start_x, start_y, boss3Size, boss3Size);
-		add(Boss);
-		invadersUpdateTimer = new Timer(invadersSpeed, this);
-		invadersUpdateTimer.start();
+	public void setInvadersSpeed(int invadersSpeed) {
+		this.invadersSpeed = invadersSpeed;
+	}
+
+	private boolean bossDead = false;
+	GRect Boss;
+	GraphicsProgram gameScr; 
+	
+	public Boss(GraphicsProgram screen) {
+		gameScr = screen;
+		run();
 	}
 	
+	public boolean isBossDead() {
+		return bossDead;
+	}
+
+	//@Override
+	public void run() {
+		Boss = new GRect(start_x, start_y, boss3Size, boss3Size);
+		Boss.setColor(Color.WHITE);
+		Boss.setFilled(true);
+		gameScr.add(Boss);
+		//invadersUpdateTimer = new Timer(invadersSpeed, this);
+		//invadersUpdateTimer.start();
+	}
+	
+	/*
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == invadersUpdateTimer) {
 			moveBoss();
 		}
 	}
+	*/
 		
-	private void moveBoss() {
+	public void moveBoss() {
 		var generator = new Random();
-		int dx = generator.nextInt((360-10))+10;
-		int dy = generator.nextInt(250);
+		double dx = generator.nextInt((360-10))+10;
+		double dy = generator.nextInt(250);
+		setX((int) dx);
+		setY((int) dy);
 		Boss.setLocation(dx, dy);
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
 	}
 	
 	public int getX() {
@@ -66,16 +90,20 @@ public class Boss extends GraphicsProgram {
 	public int getY() {
 		return y;
 	}
+
+	public boolean isVisible() {
+		return Boss.isVisible();
+	}
+
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return (int) Boss.getWidth();
+	}
 	
-		/*
-		public Bomb getBomb() {
-			return bomb;	
-			}
-		
-		public void run() {
-			gameScr.add(Boss);
-		}
-		*/
+	public int getHeight() {
+		// TODO Auto-generated method stub
+		return (int) Boss.getHeight();
+	}
 	}
 	
 //audio.playSound("src/main/resources" , "bossSound.mp3");
