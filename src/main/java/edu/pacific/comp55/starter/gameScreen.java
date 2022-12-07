@@ -179,10 +179,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				
 				for (GOval sh :shot.getShots()) {
 					Rectangle temp1 = new Rectangle();
-					temp1.setBounds((int)sh.getX(), (int)sh.getY(), (int)sh.getWidth(), (int)sh.getHeight());
+					temp1.setBounds((int)sh.getX(), (int)sh.getY(), (int)sh.getWidth() + 5, (int)sh.getHeight() + 5);
 					for(GImage inv : invaders.getInvaders()) {
 						Rectangle temp2 = new Rectangle();
-						temp2.setBounds((int)inv.getX(), (int)inv.getY(), (int)inv.getWidth(), (int)inv.getHeight());
+						temp2.setBounds((int)inv.getX(), (int)inv.getY(), (int)inv.getWidth() + 10, (int)inv.getHeight() + 10);
 						if (temp1.intersects(temp2) && sh.isVisible() && inv.isVisible()) {
 							if (inv.isVisible()) {
 								invaders.incrementDeaths();
