@@ -73,6 +73,9 @@ public class Boss {
 	*/
 	public void minusNumLives() {
 		numLives--;
+		if (numLives == 0) {
+			bossDead = true;
+		}
 	}
 	
 	public void moveBoss() {
