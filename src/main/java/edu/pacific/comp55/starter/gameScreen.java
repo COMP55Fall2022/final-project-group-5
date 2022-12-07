@@ -35,8 +35,11 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	private Timer invadersUpdateTimer;
 	private int invadersSpeed = 300;
 	private int numLives = 0;
+	private long scoreNum;
+	AudioPlayer audio;
+	private String currentMusic;
+	//private Timer bombTimer;
 
-	// private Timer bombTimer;
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
 		requestFocus();
@@ -110,6 +113,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	}
 
 	private void drawGame() {
+		audio = AudioPlayer.getInstance();
+		audio.playSound("sounds", "Invaders_Background.mp3", true);
+		currentMusic = "Invaders_Background.mp3";
+		
 		removeAll();
 		addBackground();
 
@@ -162,6 +169,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	 */
 
 	public void bossLVL() {
+		audio = AudioPlayer.getInstance();
+		audio.stopSound("sounds", "Invaders_Background.mp3");
+		audio.playSound("sounds", "boss_music.mp3", true);
+		currentMusic = "boss_music.mp3";
 		boss = new Boss(this);
 		invadersUpdateTimer = new Timer(boss.getInvadersSpeed(), this);
 		invadersUpdateTimer.start();
@@ -169,6 +180,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 
 	public void bossPerform(ActionEvent e) {
 		if (boss.isBossDead()) {
+			audio.stopSound("sounds", currentMusic);
 			player = null;
 			boss = null;
 			shot = null;
@@ -194,6 +206,12 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 						(int) boss.getHeight() + 10);
 				if (temp1.intersects(temp2) && sh.isVisible() && boss.isVisible()) {
 					if (boss.isVisible()) {
+						if (boss.getNumLives() == 1) {
+							audio = AudioPlayer.getInstance();
+							audio.stopSound("sounds", "boss_music.mp3");
+							audio.playSound("sounds", "Boss_final_form.mp3", true);
+							currentMusic = "Boss_final_form.mp3";
+						}
 						boss.minusNumLives();
 						boss.setImage(true);
 						sh.setVisible(false);
@@ -218,6 +236,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 						bomb = null;
 						invadersUpdateTimer = null;
 						gameStarted = false;
+						audio.stopSound("sounds", currentMusic);
 						drawMainMenu();
 						return;
 					}
@@ -292,6 +311,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 						bomb = null;
 						invadersUpdateTimer = null;
 						gameStarted = false;
+						audio.stopSound("sounds", currentMusic);
 						drawMainMenu();
 						return;
 					}
@@ -350,6 +370,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			if (shot != null) {
 				if (key == KeyEvent.VK_SPACE) {
 					shot.addAShot(player.getX() + 19, player.getY() - 5);
+					AudioPlayer audio = AudioPlayer.getInstance();
+					audio.playSound("sounds", "shoot.mp3", false);
 				}
 			}
 		}

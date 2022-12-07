@@ -27,6 +27,10 @@ public class Boss {
 	private int invadersSpeed = 100;
 	private int numLives;
 	
+	public int getNumLives() {
+		return numLives;
+	}
+
 	public int getInvadersSpeed() {
 		return invadersSpeed;
 	}
@@ -85,7 +89,7 @@ public class Boss {
 			if (numLives == 2) {
 				Boss.setSize(boss2Size, boss2Size);
 			}
-			else {
+			else if (numLives == 1) {
 				Boss.setSize(boss3Size, boss3Size);
 			}
 		}
