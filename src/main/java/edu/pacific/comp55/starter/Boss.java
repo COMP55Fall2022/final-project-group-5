@@ -25,6 +25,7 @@ public class Boss {
 	int start_y = 250;
 	private Timer invadersUpdateTimer;
 	private int invadersSpeed = 100;
+	private int numLives;
 	
 	public int getInvadersSpeed() {
 		return invadersSpeed;
@@ -49,9 +50,10 @@ public class Boss {
 
 	//@Override
 	public void run() {
-		Boss = new GRect(start_x, start_y, boss3Size, boss3Size);
+		Boss = new GRect(start_x, start_y, boss1Size, boss1Size);
 		Boss.setColor(Color.WHITE);
 		Boss.setFilled(true);
+		numLives = 3;
 		gameScr.add(Boss);
 		//invadersUpdateTimer = new Timer(invadersSpeed, this);
 		//invadersUpdateTimer.start();
@@ -65,7 +67,10 @@ public class Boss {
 		}
 	}
 	*/
-		
+	public void minusNumLives() {
+		numLives--;
+	}
+	
 	public void moveBoss() {
 		var generator = new Random();
 		double dx = generator.nextInt((360-10))+10;
@@ -73,6 +78,17 @@ public class Boss {
 		setX((int) dx);
 		setY((int) dy);
 		Boss.setLocation(dx, dy);
+	}
+	
+	public void setImage(boolean damaged) {
+		if (damaged) {
+			if (numLives == 2) {
+				Boss.setSize(boss2Size, boss2Size);
+			}
+			else {
+				Boss.setSize(boss3Size, boss3Size);
+			}
+		}
 	}
 	
 	public void setX(int x) {

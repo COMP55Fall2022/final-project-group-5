@@ -196,8 +196,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				temp2.setBounds((int)boss.getX(), (int)boss.getY(), (int)boss.getWidth() + 10, (int)boss.getHeight() + 10);
 				if (temp1.intersects(temp2) && sh.isVisible() && boss.isVisible()) {
 					if (boss.isVisible()) {
-						//invaders.incrementDeaths();
-						//boss.setVisible(false);
+						boss.minusNumLives();
+						boss.setImage(true);
 						sh.setVisible(false);
 					}
 				}
