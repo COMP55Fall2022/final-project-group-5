@@ -126,9 +126,6 @@ public class Boss {
 	}
 	}
 	
-//audio.playSound("src/main/resources" , "bossSound.mp3");
-//public void playSound(String sounds, String bossSound.mp3) {
-//	playSound(sounds, filename, bossSound.mp3);
-//}
+
 	
 	
