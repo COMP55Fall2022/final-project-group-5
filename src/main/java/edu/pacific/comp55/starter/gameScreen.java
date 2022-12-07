@@ -36,6 +36,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	private int invadersSpeed = 300;
 	private int numLives = 0;
 	private long scoreNum;
+	private int fireRate;
 	AudioPlayer audio;
 	private String currentMusic;
 	//private Timer bombTimer;
@@ -119,7 +120,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		
 		removeAll();
 		addBackground();
-
+		
+		fireRate = 2;
 		numLives = 3;
 
 		GLabel lives = new GLabel("Lives: ", 300, 20);
@@ -158,6 +160,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
 			if (invDestroyed == false) {
+				fireRate++;
 				invPerform(e);
 			} else {
 				bossPerform(e);
@@ -206,13 +209,13 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 						(int) boss.getHeight() + 10);
 				if (temp1.intersects(temp2) && sh.isVisible() && boss.isVisible()) {
 					if (boss.isVisible()) {
+						boss.minusNumLives();
 						if (boss.getNumLives() == 1) {
 							audio = AudioPlayer.getInstance();
 							audio.stopSound("sounds", "boss_music.mp3");
 							audio.playSound("sounds", "Boss_final_form.mp3", true);
 							currentMusic = "Boss_final_form.mp3";
 						}
-						boss.minusNumLives();
 						boss.setImage(true);
 						sh.setVisible(false);
 					}
@@ -346,6 +349,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 				bomb = null;
 				invadersUpdateTimer = null;
 				gameStarted = false;
+				audio = AudioPlayer.getInstance();
+				audio.stopSound("sounds", currentMusic);
 				drawMainMenu();
 			} else if (getElementAt(e.getX(), e.getY()) == pause.getResume()) {
 				pause.removeDraw();
