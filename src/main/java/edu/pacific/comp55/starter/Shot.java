@@ -16,11 +16,9 @@ public class Shot implements ActionListener {
 	public static final int SIZE = 10;
 	public static final int MS = 50;
 	public static final int SPEED = 10;
+	private AudioPlayer audio;
 	private ArrayList <GOval> shots;
-	//private ArrayList <Invaders> enemies;
 	public static Timer t;
-	private GObject s;
-	//PlayerShip ship;
 	GraphicsProgram gameScr; 
 	
 	public Shot(GraphicsProgram screen) {
@@ -38,20 +36,13 @@ public class Shot implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		moveAllShotsOnce();
-		//removeShot();
 	}
-	
-//	public void keyPressed(KeyEvent e) {
-//		int key = e.getKeyCode();
-//		
-//		if (key == KeyEvent.VK_SPACE) {
-//			addAShot(ship.getX());
-//		}
-//	}
 	
 	public void addAShot(double x, double y) {
 		GOval shot = makeShot(x, y);
 		System.out.println("shot count");
+		//audio.getInstance()
+		//audio.playSound("src/main/resources", "video.mp4");
 		gameScr.add(shot);
 //		shots.add(shot);
 	}
@@ -61,6 +52,7 @@ public class Shot implements ActionListener {
 		temp.setColor(Color.WHITE);
 		temp.setFilled(true);
 		shots.add(temp);
+		// AudioPlayer
 		return temp;
 	}
 	
@@ -80,6 +72,16 @@ public class Shot implements ActionListener {
 
 	public ArrayList<GOval> getShots() {
 		return shots;
+	}
+	
+	public void removeShot(double x, double y) {
+		for (int i = 0; i < shots.size(); i++) {
+			if (shots.get(i).getX() == x && shots.get(i).getY() == y) {
+				shots.remove(i);
+				gameScr.remove(shots.get(i));
+				System.out.println("delete");
+			}
+		}
 	}
 	
 //	private void removeShot() {

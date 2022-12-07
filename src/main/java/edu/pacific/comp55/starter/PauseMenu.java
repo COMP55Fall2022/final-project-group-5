@@ -91,7 +91,4 @@ public class PauseMenu {
 		return pauseGame;
 	}
 	
-	public void mousePressed(MouseEvent e) {
-	
-	}
 }

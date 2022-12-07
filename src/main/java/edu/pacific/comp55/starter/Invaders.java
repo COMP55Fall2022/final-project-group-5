@@ -16,6 +16,21 @@ public class Invaders {
 	int start_x = 0;
 	int start_y = 50;
 	double invX, invY;
+	private int deaths = 0;
+	
+	public boolean getDeaths() {
+		if (deaths == 21) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public void incrementDeaths() {
+		deaths++;
+	}
+
 	int moveRange = MOVE_RANGE;
 	double randX = 0;
 	double randY = 0;
@@ -27,6 +42,7 @@ public class Invaders {
 	}
 
 	GraphicsProgram gameScr; 
+	
 	
 	public Invaders(GraphicsProgram screen) {
 		gameScr = screen;
@@ -46,6 +62,8 @@ public class Invaders {
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 3; j++) {
 				invaders.add(new GImage("media/new invaders resize.PNG", start_x + (i*50), start_y + (j*50)));
+				setX(start_x + (i*50));
+				setY(start_y + (j*50));
 			}
 		}
 	}
@@ -75,6 +93,7 @@ public class Invaders {
 		}
 	}
 	
+	
 	private void setX(int x) {
 		this.x = x;
 	}
@@ -94,7 +113,15 @@ public class Invaders {
 	
 	public void setRandInv() {
 		var generator = new Random();
+		boolean visible = false;
 		int index = generator.nextInt(invaders.size());
+		while (!visible) {
+			if (invaders.get(index).isVisible()) {
+				visible = true;
+				break;
+			}
+			index = generator.nextInt(invaders.size());
+		}
 		this.randX = invaders.get(index).getX();
 		this.randY = invaders.get(index).getY();
 	}
@@ -110,6 +137,19 @@ public class Invaders {
 	public boolean getBound() {
 		return reachedBound;
 	}
+
+	
+	public void removeInv(double x, double y) {
+		for (int i = 0; i < invaders.size(); i++) {
+			if (invaders.get(i).getX() == x && invaders.get(i).getY() == y && invaders.get(i).isVisible()) {
+				gameScr.remove(invaders.get(i));
+				invaders.remove(i);
+				System.out.println("delete");
+				return;
+			}
+		}
+	}
+
 	public boolean checkCollisions() {
 		for (GImage inv : getInvaders()) {
 			if (inv.getY() == 420) {
@@ -117,7 +157,6 @@ public class Invaders {
 			}
 		}
 		return false;
-	}
-}
+	}}
 
 	//comment
