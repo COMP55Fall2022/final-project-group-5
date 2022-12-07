@@ -156,7 +156,9 @@ public class gameScreen extends GraphicsProgram implements ActionListener{
 				invadersUpdateTimer.start();
 			}
 			if (invaders.checkCollisions()) {
-				// game over screen
+				System.out.println("game over");
+				
+				
 			}
 		}
 	}
