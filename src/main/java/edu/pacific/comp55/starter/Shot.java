@@ -16,13 +16,19 @@ public class Shot implements ActionListener {
 	public static final int SIZE = 10;
 	public static final int MS = 50;
 	public static final int SPEED = 10;
-	private AudioPlayer audio;
+	//private AudioPlayer audio;
 	private ArrayList <GOval> shots;
 	public static Timer t;
+	private int fireRate;
+	public int getFireRate() {
+		return fireRate;
+	}
+
 	GraphicsProgram gameScr; 
 	
 	public Shot(GraphicsProgram screen) {
 		gameScr = screen;
+		fireRate = 0;
 		init();
 	}
 	
@@ -34,16 +40,25 @@ public class Shot implements ActionListener {
 		t.start(); 
 	}
 	
+	public void incrementRate() {
+		fireRate++;
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		moveAllShotsOnce();
 	}
 	
 	public void addAShot(double x, double y) {
-		GOval shot = makeShot(x, y);
-		System.out.println("shot count");
-		//audio.getInstance()
-		//audio.playSound("src/main/resources", "video.mp4");
-		gameScr.add(shot);
+		if (fireRate == 3) {
+			GOval shot = makeShot(x, y);
+			System.out.println("shot count");
+			//audio.getInstance()
+			//audio.playSound("src/main/resources", "video.mp4");
+			gameScr.add(shot);
+			AudioPlayer audio = AudioPlayer.getInstance();
+			audio.playSound("sounds", "shoot.mp3", false);
+			fireRate = 0;
+		}
 //		shots.add(shot);
 	}
 	

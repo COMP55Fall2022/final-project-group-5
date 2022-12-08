@@ -121,7 +121,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		removeAll();
 		addBackground();
 		
-		fireRate = 2;
+		fireRate = 100;
 		numLives = 3;
 
 		GLabel lives = new GLabel("Lives: ", 300, 20);
@@ -159,8 +159,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
+			if (shot.getFireRate() < 3) {
+				shot.incrementRate();
+			}
 			if (invDestroyed == false) {
-				fireRate++;
 				invPerform(e);
 			} else {
 				bossPerform(e);
@@ -194,6 +196,9 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			drawMainMenu();
 			return;
 		} else {
+			if (player.isVisible() == false) {
+				player.revive();
+			}
 			boss.moveBoss();
 			bombT++;
 			bomb.actionPerformed(e);
@@ -229,8 +234,9 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 				if (temp1.intersects(temp2) && player.isVisible() && b.isVisible()) {
 					numLives--;
 					player.damaged(true, numLives);
-					audio.playSound("sounds", "explosion.mp3", false);
 					life.deleteImage();
+					audio = AudioPlayer.getInstance();
+					audio.playSound("sounds", "explosion.mp3", false);
 					b.setVisible(false);
 					if (numLives == 0) {
 						player = null;
@@ -310,6 +316,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 					player.damaged(true, numLives);
 					life.deleteImage();
 					bomb.setVisible(false);
+					audio = AudioPlayer.getInstance();
+					audio.playSound("sounds", "explosion.mp3", false);
 					if (numLives == 0) {
 						player = null;
 						invaders = null;
@@ -379,8 +387,6 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			if (shot != null) {
 				if (key == KeyEvent.VK_SPACE) {
 					shot.addAShot(player.getX() + 19, player.getY() - 5);
-					AudioPlayer audio = AudioPlayer.getInstance();
-					audio.playSound("sounds", "shoot.mp3", false);
 				}
 			}
 		}
