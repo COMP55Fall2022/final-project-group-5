@@ -16,6 +16,7 @@ public class PlayerShip {
 	int START_X = 230;
 	int START_Y = 420;
 	//private Timer t;
+	GImage explosion;
 	GObject playerShip; //= new GImage("images/playerShip4.png", START_X, START_Y);
 	GraphicsProgram gameScr; 
 	
@@ -81,16 +82,16 @@ public class PlayerShip {
 		}
 	}
 	
-	private void revive() { 
+	public void revive() { 
+		gameScr.remove(explosion);
 		playerShip.setVisible(true);
 	}
 	
 	public void damaged(boolean damaged, int lives) { 
 		if (damaged) {
+			explosion = new GImage("ship_exp.png", playerShip.getX(), playerShip.getY());
 			playerShip.setVisible(false);
-			if (lives > 0) {
-				revive();
-			}
+			gameScr.add(explosion);
 		}
 	}
 

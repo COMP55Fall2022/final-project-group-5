@@ -229,6 +229,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 				if (temp1.intersects(temp2) && player.isVisible() && b.isVisible()) {
 					numLives--;
 					player.damaged(true, numLives);
+					audio.playSound("sounds", "explosion.mp3", false);
 					life.deleteImage();
 					b.setVisible(false);
 					if (numLives == 0) {
@@ -261,6 +262,9 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			bossLVL();
 			return;
 		} else {
+			if (player.isVisible() == false) {
+				player.revive();
+			}
 			invaders.Move();
 			bombT++;
 			bomb.actionPerformed(e);
