@@ -32,13 +32,14 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	private int bombSPD = 10;
 	private boolean gameStarted = false;
 	private boolean invDestroyed;
+	private boolean mm;
 	private Timer invadersUpdateTimer;
 	private int invadersSpeed = 300;
 	private int numLives = 0;
-	private long scoreNum;
-	private int fireRate;
+	private long elapseTime;
 	AudioPlayer audio;
 	private String currentMusic;
+	private GRect resumeBox, exitBox, popUp;
 	//private Timer bombTimer;
 
 	public void init() {
@@ -50,7 +51,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		scoreboard = new Scoreboard(this);
 		life = new Lives(this);
 		// all draws
-		drawMainMenu();
+		drawWin();
+		//drawMainMenu();
 		addKeyListeners();
 		addMouseListeners();
 	}
@@ -60,10 +62,56 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		background.setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
 		add(background);
 	}
+	
+	private void drawWin() {
+		addBackground();
+		mm = false;
+		//popUp = new GRect(137, 135, 225, 205);
+		//popUp.setColor(Color.BLACK);
+		//popUp.setFilled(true);
+		//add(popUp);
+		
+		GLabel win = new GLabel("Congragulation!", 134, 170);
+		win.setFont("Arial-Bold-30");
+		win.setColor(Color.WHITE);
+		add(win);
+		
+		GLabel stringWin = new GLabel("For your attempt at", 134, 200);
+		stringWin.setFont("Arial-Bold-26");
+		stringWin.setColor(Color.WHITE);
+		add(stringWin);
+		
+		GLabel stringWin2 = new GLabel("ABORTION!", 180, 230);
+		stringWin2.setFont("Arial-Bold-26");
+		stringWin2.setColor(Color.WHITE);
+		add(stringWin2);
+		
+		elapseTime = 200;
+		
+		int S = (int) (elapseTime % 60);
+        int H = (int) (elapseTime / 60);
+        int M = H % 60;
+		
+		
+		GLabel recordString = new GLabel("RECORD:" , 193, 300);
+		recordString.setFont("Arial-Bold-26");
+		recordString.setColor(Color.WHITE);
+		add(recordString);
+		
+		GLabel record = new GLabel(M + ":" + S, 223, 340);
+		record.setFont("Arial-Bold-26");
+		record.setColor(Color.WHITE);
+		add(record);
+		
+		
+		//elapseTime
+	}
 
 	private void drawMainMenu() {
 		addBackground();
-
+		
+		mm = true;
+		
 		GLabel title = new GLabel("INVADERZ", 150, 150);
 		title.setFont("Arial-Bold-40");
 		title.setColor(Color.WHITE);
@@ -119,9 +167,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		currentMusic = "Invaders_Background.mp3";
 		
 		removeAll();
+		mm = false;
 		addBackground();
 		
-		fireRate = 100;
+		//fireRate = 100;
 		numLives = 3;
 
 		GLabel lives = new GLabel("Lives: ", 300, 20);
@@ -137,6 +186,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		esc.setFont("Arial-Bold-16");
 		esc.setColor(Color.WHITE);
 		add(esc);
+		
+		elapseTime = 0;
 
 		life.drawLives();
 		invDestroyed = false;
@@ -159,6 +210,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
+			elapseTime++;
 			if (shot.getFireRate() < 3) {
 				shot.incrementRate();
 			}
@@ -193,7 +245,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			bomb = null;
 			invadersUpdateTimer = null;
 			gameStarted = false;
-			drawMainMenu();
+			drawWin();
 			return;
 		} else {
 			if (player.isVisible() == false) {
@@ -388,6 +440,11 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 				if (key == KeyEvent.VK_SPACE) {
 					shot.addAShot(player.getX() + 19, player.getY() - 5);
 				}
+			}
+		}
+		if (gameStarted == false && mm == false) {
+			if (key == KeyEvent.VK_SPACE) {
+				drawMainMenu();
 			}
 		}
 	}
