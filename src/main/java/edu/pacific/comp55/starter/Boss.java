@@ -14,11 +14,11 @@ import acm.program.GraphicsProgram;
 
 
 public class Boss {
-	private static final int PROGRAM_HEIGHT = 500;
-	private static final int PROGRAM_WIDTH = 500;
-	private static final int boss1Size = 125;
-	private static final int boss2Size = 84;
-	private static final int boss3Size = 43;
+	//private static final int PROGRAM_HEIGHT = 500;
+	//private static final int PROGRAM_WIDTH = 500;
+	//private static final int boss1Size = 125;
+	//private static final int boss2Size = 84;
+	//private static final int boss3Size = 43;
 	int x;
 	int y;
 	int start_x = 250;
@@ -40,7 +40,7 @@ public class Boss {
 	}
 
 	private boolean bossDead = false;
-	GRect Boss;
+	GImage Boss;
 	GraphicsProgram gameScr; 
 	
 	public Boss(GraphicsProgram screen) {
@@ -54,9 +54,9 @@ public class Boss {
 
 	//@Override
 	public void run() {
-		Boss = new GRect(start_x, start_y, boss1Size, boss1Size);
+		Boss = new GImage("media/IMG_0668 Background Removed.png", start_x, start_y);//new GRect(start_x, start_y, boss1Size, boss1Size);
 		Boss.setColor(Color.WHITE);
-		Boss.setFilled(true);
+		//Boss.setFilled(true);
 		numLives = 3;
 		gameScr.add(Boss);
 		//invadersUpdateTimer = new Timer(invadersSpeed, this);
@@ -90,10 +90,14 @@ public class Boss {
 	public void setImage(boolean damaged) {
 		if (damaged) {
 			if (numLives == 2) {
-				Boss.setSize(boss2Size, boss2Size);
+				gameScr.remove(Boss);
+				Boss = new GImage("media/IMG_0668 Background Removed.png", getX(), getY());
+				gameScr.add(Boss);
 			}
 			else if (numLives == 1) {
-				Boss.setSize(boss3Size, boss3Size);
+				gameScr.remove(Boss);
+				Boss = new GImage("media/smaller fetus.png", getX(), getY());
+				gameScr.add(Boss);
 			}
 		}
 	}
