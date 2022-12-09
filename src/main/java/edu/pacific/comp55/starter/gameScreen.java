@@ -105,6 +105,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		record.setColor(Color.WHITE);
 		add(record);
 		
+		scoreboard.setRanks(elapseTime, "P");
+		
 		
 		//elapseTime
 	}

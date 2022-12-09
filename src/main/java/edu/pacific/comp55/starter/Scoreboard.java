@@ -17,8 +17,8 @@ public class Scoreboard {
 	private ArrayList<Pair<String, Long>> ranks = new ArrayList<Pair<String, Long>>() {
 		 {
              add(new Pair<>("p1", 0L));
-             add(new Pair<>("p1", 0L));
-             add(new Pair<>("p1", 0L));
+             add(new Pair<>("p2", 0L));
+             add(new Pair<>("p3", 0L));
          }
 	};
 	
@@ -55,19 +55,31 @@ public class Scoreboard {
 		
 		for (int i = 0; i < ranks.size(); i++) {
 			int y = 175 + i*50; 
-			GLabel rank = new GLabel((i+1)+". N/A - 00:00:00", 153, y);
-			rank.setFont("Arial-Bold-22");
-			rank.setColor(Color.WHITE);
-			gameScreenRef.add(rank);;
+			if (ranks.get(i).getValue() == 0L) {
+				GLabel rank = new GLabel((i+1)+". N/A - 00:00:00", 153, y);
+				rank.setFont("Arial-Bold-22");
+				rank.setColor(Color.WHITE);
+				gameScreenRef.add(rank);;
+			}
+			else {
+				int S = (int) (ranks.get(i).getValue() % 60);
+		        int H = (int) (ranks.get(i).getValue() / 60);
+		        int M = H % 60;
+				GLabel rank = new GLabel((i+1)+". " + ranks.get(i).getKey() + " - 00: " + M + ":"+S, 153, y);
+				rank.setFont("Arial-Bold-22");
+				rank.setColor(Color.WHITE);
+				gameScreenRef.add(rank);
+			}
 		}
 		//140
 		
 	}
 	
-	public void setRanks(Long elapseTime, String name) {
+	public void setRanks(long elapseTime, String name) {
 		for (int i = 0; i < ranks.size();i++) {
 			if (ranks.get(i).getValue() < elapseTime) {				
 				ranks.set(i, new Pair<> (name, elapseTime));
+				return;
 			}
 		}
 	}
