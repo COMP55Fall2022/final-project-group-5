@@ -31,14 +31,16 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	private int bombT;
 	private int bombSPD;
 	private boolean gameStarted = false;
-	private boolean invDestroyed;
+	private boolean invDestroyed, scareOn;
 	private boolean mm;
-	private Timer invadersUpdateTimer;
+	private Timer invadersUpdateTimer, jumpScareT;
+	private int scareSec;
 	private int invadersSpeed;
 	private int numLives = 0;
 	private long elapseTime;
 	AudioPlayer audio;
 	private String currentMusic;
+	private GImage scareImg;
 	//private GRect resumeBox, exitBox, popUp;
 	//private Timer bombTimer;
 
@@ -49,7 +51,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 
 	public void run() {
 		scoreboard = new Scoreboard(this);
-		life = new Lives(this);
+		//life = new Lives(this);
 		// all draws
 		//drawWin();
 		drawMainMenu();
@@ -110,6 +112,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	private void drawMainMenu() {
 		addBackground();
 		
+		scareOn = false;
 		mm = true;
 		
 		GLabel title = new GLabel("INVADERZ", 150, 150);
@@ -191,6 +194,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		bombSPD = 6;
 		bombT = 0;
 		invadersSpeed = 200;
+		life = new Lives(this);
 		life.drawLives();
 		invDestroyed = false;
 		player = new PlayerShip(this);
@@ -222,6 +226,19 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 				bossPerform(e);
 			}
 		}
+		if (e.getSource() == jumpScareT && jumpScareT.isRunning()) {
+			scareSec++;
+			if ((scareSec % 2) == 0) {
+				remove(scareImg);
+				scareImg = new GImage("media/scary image 2.PNG", 0, 0);
+				add(scareImg);
+			}
+			else {
+				remove(scareImg);
+				scareImg = new GImage("media/scary image 1.PNG", 0, 0);
+				add(scareImg);
+			}
+		}
 	}
 	/*
 	 * if (invaders.checkCollisions()) { // game over screen }
@@ -245,6 +262,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			shot = null;
 			pause = null;
 			bomb = null;
+			life = null;
 			invadersUpdateTimer = null;
 			gameStarted = false;
 			drawWin();
@@ -298,6 +316,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 						shot = null;
 						pause = null;
 						bomb = null;
+						life = null;
 						invadersUpdateTimer = null;
 						gameStarted = false;
 						audio.stopSound("sounds", currentMusic);
@@ -415,7 +434,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 						invadersUpdateTimer = null;
 						gameStarted = false;
 						audio.stopSound("sounds", currentMusic);
-						drawMainMenu();
+						//drawMainMenu();
+						jumpScare();
 						return;
 					}
 				}
@@ -423,6 +443,18 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		}
 	}
 
+	public void jumpScare() {
+		setSize(1002, 797);
+		scareSec = 0;
+		audio = AudioPlayer.getInstance();
+		audio.playSound("sounds", "scary sound.mp3", true);
+		scareImg = new GImage("media/scary image 2.PNG", 0, 0);
+		add(scareImg);
+		jumpScareT = new Timer(80, this);
+		scareOn = true;
+		jumpScareT.start();
+	}
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (!gameStarted) {
@@ -448,6 +480,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 				pause = null;
 				bomb = null;
 				invadersUpdateTimer = null;
+				life = null;
 				gameStarted = false;
 				audio = AudioPlayer.getInstance();
 				audio.stopSound("sounds", currentMusic);
@@ -482,6 +515,17 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		}
 		if (gameStarted == false && mm == false) {
 			if (key == KeyEvent.VK_W) {
+				jumpScare();
+			}
+		}
+		if (scareOn == true && jumpScareT.isRunning()) {
+			if (key == KeyEvent.VK_ESCAPE) {
+				audio = AudioPlayer.getInstance();
+				audio.stopSound("sounds", "scary sound.mp3");
+				jumpScareT.stop();
+				jumpScareT = null;
+				remove(scareImg);
+				setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
 				drawMainMenu();
 			}
 		}

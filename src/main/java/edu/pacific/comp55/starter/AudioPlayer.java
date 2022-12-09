@@ -168,4 +168,12 @@ public final class AudioPlayer {
 			}
 		});
 	}
+	
+	public boolean isSoundOn(String folder, String filename) {
+		MediaPlayer sound = findSound(folder, filename);
+		if (sound.isMute()) {
+			return false;
+		}
+		return true;
+	} 
 }
