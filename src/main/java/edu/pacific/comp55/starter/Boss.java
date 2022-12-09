@@ -54,7 +54,7 @@ public class Boss {
 
 	//@Override
 	public void run() {
-		Boss = new GImage("media/IMG_0668 Background Removed.png", start_x, start_y);//new GRect(start_x, start_y, boss1Size, boss1Size);
+		Boss = new GImage("media/boss.png", start_x, start_y);//new GRect(start_x, start_y, boss1Size, boss1Size);
 		Boss.setColor(Color.WHITE);
 		//Boss.setFilled(true);
 		numLives = 3;
