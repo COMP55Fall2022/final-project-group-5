@@ -49,7 +49,7 @@ public class Shot implements ActionListener {
 	}
 	
 	public void addAShot(double x, double y) {
-		if (fireRate == 3) {
+		if (fireRate == 2) {
 			GOval shot = makeShot(x, y);
 			System.out.println("shot count");
 			//audio.getInstance()

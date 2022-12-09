@@ -28,18 +28,18 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	private PauseMenu pause;
 	private Shot shot;
 	private Boss boss;
-	private int bombT = 0;
-	private int bombSPD = 10;
+	private int bombT;
+	private int bombSPD;
 	private boolean gameStarted = false;
 	private boolean invDestroyed;
 	private boolean mm;
 	private Timer invadersUpdateTimer;
-	private int invadersSpeed = 300;
+	private int invadersSpeed;
 	private int numLives = 0;
 	private long elapseTime;
 	AudioPlayer audio;
 	private String currentMusic;
-	private GRect resumeBox, exitBox, popUp;
+	//private GRect resumeBox, exitBox, popUp;
 	//private Timer bombTimer;
 
 	public void init() {
@@ -51,8 +51,8 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		scoreboard = new Scoreboard(this);
 		life = new Lives(this);
 		// all draws
-		drawWin();
-		//drawMainMenu();
+		//drawWin();
+		drawMainMenu();
 		addKeyListeners();
 		addMouseListeners();
 	}
@@ -86,7 +86,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		stringWin2.setColor(Color.WHITE);
 		add(stringWin2);
 		
-		elapseTime = 200;
+		//elapseTime = 200;
 		
 		int S = (int) (elapseTime % 60);
         int H = (int) (elapseTime / 60);
@@ -188,7 +188,9 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		add(esc);
 		
 		elapseTime = 0;
-
+		bombSPD = 6;
+		bombT = 0;
+		invadersSpeed = 200;
 		life.drawLives();
 		invDestroyed = false;
 		player = new PlayerShip(this);
@@ -211,7 +213,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == invadersUpdateTimer && invadersUpdateTimer.isRunning()) {
 			elapseTime++;
-			if (shot.getFireRate() < 3) {
+			if (shot.getFireRate() < 2) {
 				shot.incrementRate();
 			}
 			if (invDestroyed == false) {
@@ -323,7 +325,22 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			if (player.isVisible() == false) {
 				player.revive();
 			}
+			///
 			invaders.Move();
+			for (GImage inv : invaders.getInvaders()) {
+				if (inv.isVisible() && inv.getY() >= 410) {
+					player = null;
+					invaders = null;
+					shot = null;
+					pause = null;
+					bomb = null;
+					invadersUpdateTimer = null;
+					gameStarted = false;
+					audio.stopSound("sounds", currentMusic);
+					drawMainMenu();
+					return;
+				}
+			}
 			bombT++;
 			bomb.actionPerformed(e);
 			if (bombT == bombSPD) {
@@ -333,9 +350,12 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			}
 			if (invaders.getBound()) {
 				invadersUpdateTimer.stop();
-				invadersSpeed -= 25;
+				if (invadersSpeed > 30) {
+					invadersSpeed -= 13;
+				}
 				invadersUpdateTimer = new Timer(invadersSpeed, this);
-				bombSPD -= (bombSPD > 0) ? 1 : 0;
+				bombSPD -= (bombSPD > 1) ? 1 : 0;
+				bombT = 0;
 				invadersUpdateTimer.start();
 			}
 
@@ -357,7 +377,23 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 					}
 				}
 			}
-
+			//
+			for (GOval sh : shot.getShots()) {
+				Rectangle temp1 = new Rectangle();
+				temp1.setBounds((int) sh.getX(), (int) sh.getY(), (int) sh.getWidth() + 40, (int) sh.getHeight() + 20);
+				for (GRect bomb : bomb.getBombs()) {
+					Rectangle temp2 = new Rectangle();
+					temp2.setBounds((int) bomb.getX(), (int) bomb.getY(), (int) bomb.getWidth() + 15, (int) bomb.getHeight() + 5);
+					if (temp1.intersects(temp2)) {
+						if (bomb.isVisible() && sh.isVisible()) {
+							sh.setVisible(false);
+							bomb.setVisible(false);
+						}
+							
+					}
+				}
+			}
+				//
 			for (GRect bomb : bomb.getBombs()) {
 				Rectangle temp1 = new Rectangle();
 				temp1.setBounds((int) bomb.getX(), (int) bomb.getY(), (int) bomb.getWidth(), (int) bomb.getHeight());
@@ -421,6 +457,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 				invadersUpdateTimer.start();
 				bomb.resumeBomb();
 				pause.setPause();
+				shot.resumeShots();
 			} else {
 				System.out.println("nothing");
 			}
@@ -435,6 +472,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			if (pause.keyPressed(e)) {
 				invadersUpdateTimer.stop();
 				bomb.pauseBomb();
+				shot.stopShots();
 			}
 			if (shot != null) {
 				if (key == KeyEvent.VK_SPACE) {
@@ -443,7 +481,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			}
 		}
 		if (gameStarted == false && mm == false) {
-			if (key == KeyEvent.VK_SPACE) {
+			if (key == KeyEvent.VK_W) {
 				drawMainMenu();
 			}
 		}
