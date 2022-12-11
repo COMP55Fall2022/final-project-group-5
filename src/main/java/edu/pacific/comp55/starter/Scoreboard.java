@@ -65,7 +65,7 @@ public class Scoreboard {
 				int S = (int) (ranks.get(i).getValue() % 60);
 		        int H = (int) (ranks.get(i).getValue() / 60);
 		        int M = H % 60;
-				GLabel rank = new GLabel((i+1)+". " + ranks.get(i).getKey() + " - 00: " + M + ":"+S, 153, y);
+				GLabel rank = new GLabel((i+1)+". " + ranks.get(i).getKey() + " - " + M + ":"+S, 153, y);
 				rank.setFont("Arial-Bold-22");
 				rank.setColor(Color.WHITE);
 				gameScreenRef.add(rank);

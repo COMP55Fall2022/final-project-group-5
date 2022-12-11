@@ -7,9 +7,12 @@ import java.awt.Color;
 import java.awt.Rectangle;
 
 import java.awt.event.MouseEvent;
+import java.util.Scanner;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.applet.*;
+
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 import acm.graphics.*;
@@ -19,6 +22,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
+	
 	private Bomb bomb;
 	private Lives life;
 	private GRect start, score;
@@ -41,6 +45,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	AudioPlayer audio;
 	private String currentMusic;
 	private GImage scareImg;
+	private boolean drawComplete;
 	//private GRect resumeBox, exitBox, popUp;
 	//private Timer bombTimer;
 
@@ -78,6 +83,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		win.setColor(Color.WHITE);
 		add(win);
 		
+		/*
 		GLabel stringWin = new GLabel("For your attempt at", 134, 200);
 		stringWin.setFont("Arial-Bold-26");
 		stringWin.setColor(Color.WHITE);
@@ -87,7 +93,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		stringWin2.setFont("Arial-Bold-26");
 		stringWin2.setColor(Color.WHITE);
 		add(stringWin2);
-		
+		*/
 		//elapseTime = 200;
 		
 		int S = (int) (elapseTime % 60);
@@ -95,17 +101,29 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
         int M = H % 60;
 		
 		
-		GLabel recordString = new GLabel("RECORD:" , 193, 300);
+		GLabel recordString = new GLabel("RECORD:" , 193, 230);
 		recordString.setFont("Arial-Bold-26");
 		recordString.setColor(Color.WHITE);
 		add(recordString);
 		
-		GLabel record = new GLabel(M + ":" + S, 223, 340);
+		GLabel record = new GLabel(M + ":" + S, 223, 260);
 		record.setFont("Arial-Bold-26");
 		record.setColor(Color.WHITE);
 		add(record);
 		
-		scoreboard.setRanks(elapseTime, "P");
+		GLabel recordName = new GLabel("Please enter a name for record" , 91, 320);
+		recordName.setFont("Arial-Bold-22");
+		recordName.setColor(Color.WHITE);
+		add(recordName);
+		
+		GLabel max = new GLabel("(Max: 4 CHAR)" , 175, 350);
+		max.setFont("Arial-Bold-22");
+		max.setColor(Color.WHITE);
+		add(max);
+		
+		String name = JOptionPane.showInputDialog(null, "Please enter a name here:");
+			
+		scoreboard.setRanks(elapseTime, name);
 		
 		
 		//elapseTime
