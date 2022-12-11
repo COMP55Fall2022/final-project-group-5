@@ -19,11 +19,11 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 
 	private static final int PROGRAM_HEIGHT = 500;
 	private static final int PROGRAM_WIDTH = 500;
-	public Bomb bomb;
-	public Lives life;
+	private Bomb bomb;
+	private Lives life;
 	private GRect start, score;
-	public Invaders invaders;
-	public Scoreboard scoreboard;
+	private Invaders invaders;
+	private Scoreboard scoreboard;
 	private PlayerShip player;
 	private PauseMenu pause;
 	private Shot shot;
@@ -461,13 +461,10 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	public void mousePressed(MouseEvent e) {
 		if (!gameStarted) {
 			if (getElementAt(e.getX(), e.getY()) == start) {
-				System.out.println("start");
 				drawGame();
 			} else if (getElementAt(e.getX(), e.getY()) == score) {
-				System.out.println("scoreboard");
 				drawScoreboard();
 			} else if (getElementAt(e.getX(), e.getY()) == scoreboard.getExit()) {
-				System.out.println("scoreboard exit");
 				scoreboard.Exit();
 				drawMainMenu();
 			} else {

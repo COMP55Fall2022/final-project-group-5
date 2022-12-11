@@ -35,7 +35,6 @@ public class Shot implements ActionListener {
 	public void init() {
 		//ship = new PlayerShip(gameScr);
 		shots = new ArrayList<GOval>();
-		System.out.println("shot run");
 		t = new Timer(50, this);
 		t.start(); 
 	}
@@ -51,7 +50,6 @@ public class Shot implements ActionListener {
 	public void addAShot(double x, double y) {
 		if (fireRate == 2) {
 			GOval shot = makeShot(x, y);
-			System.out.println("shot count");
 			//audio.getInstance()
 			//audio.playSound("src/main/resources", "video.mp4");
 			gameScr.add(shot);
@@ -94,7 +92,6 @@ public class Shot implements ActionListener {
 			if (shots.get(i).getX() == x && shots.get(i).getY() == y) {
 				shots.remove(i);
 				gameScr.remove(shots.get(i));
-				System.out.println("delete");
 			}
 		}
 	}

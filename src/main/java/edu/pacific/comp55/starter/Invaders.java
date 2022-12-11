@@ -52,13 +52,11 @@ public class Invaders {
 	public void run() {
 		initInvaders();
 		for (GObject invader : invaders) {
-			System.out.println("add");
 			gameScr.add(invader);
 		}
 	}
 
 	private void initInvaders() {
-		System.out.println("create");
 		for (int i = 0; i < 7; i++) {
 			for (int j = 0; j < 3; j++) {
 				invaders.add(new GImage("media/new invaders resize.PNG", start_x + (i*50), start_y + (j*50)));
@@ -144,7 +142,6 @@ public class Invaders {
 			if (invaders.get(i).getX() == x && invaders.get(i).getY() == y && invaders.get(i).isVisible()) {
 				gameScr.remove(invaders.get(i));
 				invaders.remove(i);
-				System.out.println("delete");
 				return;
 			}
 		}

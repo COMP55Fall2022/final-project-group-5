@@ -60,12 +60,10 @@ public class PlayerShip {
 		
 		if (key == KeyEvent.VK_LEFT && playerShip.getX() > 0) {
 			playerShip.move(-5, 0);
-			System.out.println("left");
 		}
 		
 		if (key == KeyEvent.VK_RIGHT && playerShip.getX()+playerShip.getWidth() + 15 < gameScr.getWidth()) {
 			playerShip.move(5, 0);
-			System.out.println("right");
 		}
 		
 	}
