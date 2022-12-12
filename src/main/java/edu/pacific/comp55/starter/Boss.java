@@ -1,44 +1,19 @@
 package edu.pacific.comp55.starter;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.util.Random;
-
-import javax.swing.Timer;
-
 import acm.graphics.GImage;
-import acm.graphics.GObject;
-import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
 
 
 public class Boss {
-	//private static final int PROGRAM_HEIGHT = 500;
-	//private static final int PROGRAM_WIDTH = 500;
-	//private static final int boss1Size = 125;
-	//private static final int boss2Size = 84;
-	//private static final int boss3Size = 43;
 	int x;
 	int y;
 	int start_x = 250;
 	int start_y = 250;
-	private Timer invadersUpdateTimer;
 	private int invadersSpeed = 100;
 	private int numLives;
-	
-	public int getNumLives() {
-		return numLives;
-	}
-
-	public int getInvadersSpeed() {
-		return invadersSpeed;
-	}
-
-	public void setInvadersSpeed(int invadersSpeed) {
-		this.invadersSpeed = invadersSpeed;
-	}
-
 	private boolean bossDead = false;
 	GImage Boss;
 	GraphicsProgram gameScr; 
@@ -52,25 +27,25 @@ public class Boss {
 		return bossDead;
 	}
 
-	//@Override
 	public void run() {
-		Boss = new GImage("media/boss.png", start_x, start_y);//new GRect(start_x, start_y, boss1Size, boss1Size);
+		Boss = new GImage("media/boss.png", start_x, start_y);
 		Boss.setColor(Color.WHITE);
-		//Boss.setFilled(true);
 		numLives = 3;
 		gameScr.add(Boss);
-		//invadersUpdateTimer = new Timer(invadersSpeed, this);
-		//invadersUpdateTimer.start();
 	}
 	
-	/*
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == invadersUpdateTimer) {
-			moveBoss();
-		}
+	public int getNumLives() {
+		return numLives;
 	}
-	*/
+
+	public int getInvadersSpeed() {
+		return invadersSpeed;
+	}
+
+	public void setInvadersSpeed(int invadersSpeed) {
+		this.invadersSpeed = invadersSpeed;
+	}
+	
 	public void minusNumLives() {
 		numLives--;
 		if (numLives == 0) {
@@ -123,12 +98,10 @@ public class Boss {
 	}
 
 	public int getWidth() {
-		// TODO Auto-generated method stub
 		return (int) Boss.getWidth();
 	}
 	
 	public int getHeight() {
-		// TODO Auto-generated method stub
 		return (int) Boss.getHeight();
 	}
 	}

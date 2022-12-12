@@ -1,21 +1,16 @@
 package edu.pacific.comp55.starter;
-import acm.graphics.*;
 
+import acm.graphics.*;
 import acm.program.*;
 import java.awt.event.KeyEvent;
 
-import javax.swing.Timer;
-
 
 public class PlayerShip {
-	private Lives life;
-	//private Bomb bomb;
 	boolean damaged = false;
 	int x;
 	int y;
 	int START_X = 230;
 	int START_Y = 420;
-	//private Timer t;
 	GImage explosion;
 	GObject playerShip; //= new GImage("images/playerShip4.png", START_X, START_Y);
 	GraphicsProgram gameScr; 
@@ -26,22 +21,7 @@ public class PlayerShip {
 		gameScr.add(playerShip);
 	}
 	
-	//private void setX(int x) {
-		//this.x = x;
-	//}
 	
-	//private void setY(int y) {
-		//this.y = y;
-	//}
-	
-	//public PlayerShip () {
-		//initPlayerShip();
-	//}
-	
-	//public void initPlayerShip() {
-		//setX(START_X);
-		//setY(START_Y);
-	//}
 	
 	public double getX() {
 		return playerShip.getX();
@@ -51,9 +31,6 @@ public class PlayerShip {
 		return playerShip.getY();
 	}
 	
-	//public void run() {
-		//gameScr.add(playerShip);
-	//}
 	
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();

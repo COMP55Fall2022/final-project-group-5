@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.Timer;
-
-import acm.graphics.GObject;
 import acm.graphics.GRect;
 import acm.program.GraphicsProgram;
 
@@ -14,11 +12,6 @@ public class Bomb extends GraphicsProgram  {
 	public static final int MS = 50;
 	public static final double SPEED = 1;
 	private ArrayList <GRect> bombs;
-	public ArrayList<GRect> getBombs() {
-		return bombs;
-	}
-
-	private GObject temp;
 	public static Timer t;
 	GraphicsProgram gameScr; 
 	public Bomb(GraphicsProgram screen) {
@@ -30,6 +23,10 @@ public class Bomb extends GraphicsProgram  {
 		bombs = new ArrayList<GRect>();
 		t = new Timer(10, this);
 		t.start();
+	}
+	
+	public ArrayList<GRect> getBombs() {
+		return bombs;
 	}
 	
 	public void addABomb(double x, double y) {
@@ -67,17 +64,6 @@ public class Bomb extends GraphicsProgram  {
 		t.start();
 	}
 	
-	public boolean checkHitShip(double pX, double pY) {
-		temp = getElementAt(pX, pY);
-		for (int i = 0; i < bombs.size(); i++) { // loop through enemies (rect)
-			if (bombs.get(i) == temp) { // if rect is equivalent to the ball's spot (x,y)
-				remove(bombs.get(i)); // remove rect on the window run display
-				bombs.remove(i);	// removes actual rect in array list
-				return true;
-			}
-		}
-		return false;
-	}
 }
 
 //comment

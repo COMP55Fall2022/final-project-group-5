@@ -3,18 +3,13 @@ package edu.pacific.comp55.starter;
 import acm.program.*;
 
 import java.awt.Color;
-
 import java.awt.Rectangle;
-
 import java.awt.event.MouseEvent;
-import java.util.Scanner;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.applet.*;
-
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-
 import acm.graphics.*;
 import java.awt.event.*;
 
@@ -32,22 +27,21 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	private PauseMenu pause;
 	private Shot shot;
 	private Boss boss;
-	private int bombT;
-	private int bombSPD;
-	private boolean gameStarted = false;
-	private boolean invDestroyed, scareOn;
-	private boolean mm;
-	private Timer invadersUpdateTimer, jumpScareT;
-	private int scareSec;
-	private int invadersSpeed;
-	private int numLives = 0;
-	private long elapseTime;
 	AudioPlayer audio;
+
+	
+	private int bombT, bombSPD, scareSec, invadersSpeed;
+	private int numLives = 0;
+	
+	private boolean gameStarted = false;
+	private boolean invDestroyed, scareOn, mm;
+	
+	private Timer invadersUpdateTimer, jumpScareT;
+	
+	private long elapseTime;
+	
 	private String currentMusic;
 	private GImage scareImg;
-	private boolean drawComplete;
-	//private GRect resumeBox, exitBox, popUp;
-	//private Timer bombTimer;
 
 	public void init() {
 		setSize(PROGRAM_WIDTH, PROGRAM_HEIGHT);
@@ -56,9 +50,6 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 
 	public void run() {
 		scoreboard = new Scoreboard(this);
-		//life = new Lives(this);
-		// all draws
-		//drawWin();
 		drawMainMenu();
 		addKeyListeners();
 		addMouseListeners();
@@ -73,28 +64,11 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 	private void drawWin() {
 		addBackground();
 		mm = false;
-		//popUp = new GRect(137, 135, 225, 205);
-		//popUp.setColor(Color.BLACK);
-		//popUp.setFilled(true);
-		//add(popUp);
 		
 		GLabel win = new GLabel("Congragulation!", 134, 170);
 		win.setFont("Arial-Bold-30");
 		win.setColor(Color.WHITE);
 		add(win);
-		
-		/*
-		GLabel stringWin = new GLabel("For your attempt at", 134, 200);
-		stringWin.setFont("Arial-Bold-26");
-		stringWin.setColor(Color.WHITE);
-		add(stringWin);
-		
-		GLabel stringWin2 = new GLabel("ABORTION!", 180, 230);
-		stringWin2.setFont("Arial-Bold-26");
-		stringWin2.setColor(Color.WHITE);
-		add(stringWin2);
-		*/
-		//elapseTime = 200;
 		
 		int S = (int) (elapseTime % 60);
         int H = (int) (elapseTime / 60);
@@ -193,7 +167,6 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 		mm = false;
 		addBackground();
 		
-		//fireRate = 100;
 		numLives = 3;
 
 		GLabel lives = new GLabel("Lives: ", 300, 20);
@@ -260,9 +233,6 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 			}
 		}
 	}
-	/*
-	 * if (invaders.checkCollisions()) { // game over screen }
-	 */
 
 	public void bossLVL() {
 		audio = AudioPlayer.getInstance();
@@ -350,21 +320,15 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 
 	public void invPerform(ActionEvent e) {
 		if (invaders.getDeaths()) {
-			// player = null;
 			invaders = null;
-			// shot = null;
-			// pause = null;
-			// bomb = null;
 			invDestroyed = true;
 			invadersUpdateTimer = null;
-			// gameStarted = false;
 			bossLVL();
 			return;
 		} else {
 			if (player.isVisible() == false) {
 				player.revive();
 			}
-			///
 			invaders.Move();
 			for (GImage inv : invaders.getInvaders()) {
 				if (inv.isVisible() && inv.getY() >= 410) {
@@ -398,7 +362,6 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 				invadersUpdateTimer.start();
 			}
 
-			// check shot collision
 
 			for (GOval sh : shot.getShots()) {
 				Rectangle temp1 = new Rectangle();
@@ -416,7 +379,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 					}
 				}
 			}
-			//
+			
 			for (GOval sh : shot.getShots()) {
 				Rectangle temp1 = new Rectangle();
 				temp1.setBounds((int) sh.getX(), (int) sh.getY(), (int) sh.getWidth() + 40, (int) sh.getHeight() + 20);
@@ -432,7 +395,7 @@ public class gameScreen extends GraphicsProgram implements ActionListener {
 					}
 				}
 			}
-				//
+				
 			for (GRect bomb : bomb.getBombs()) {
 				Rectangle temp1 = new Rectangle();
 				temp1.setBounds((int) bomb.getX(), (int) bomb.getY(), (int) bomb.getWidth(), (int) bomb.getHeight());

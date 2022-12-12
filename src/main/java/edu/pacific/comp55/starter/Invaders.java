@@ -1,9 +1,7 @@
 package edu.pacific.comp55.starter;
-import java.awt.event.ActionEvent;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import acm.graphics.GImage;
 import acm.graphics.GObject;
 import acm.program.GraphicsProgram;
@@ -17,32 +15,12 @@ public class Invaders {
 	int start_y = 50;
 	double invX, invY;
 	private int deaths = 0;
-	
-	public boolean getDeaths() {
-		if (deaths == 21) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public void incrementDeaths() {
-		deaths++;
-	}
-
 	int moveRange = MOVE_RANGE;
 	double randX = 0;
 	double randY = 0;
 	boolean reachedBound = false;
 	ArrayList<GImage> invaders;
-	
-	public ArrayList<GImage> getInvaders() {
-		return invaders;
-	}
-
 	GraphicsProgram gameScr; 
-	
 	
 	public Invaders(GraphicsProgram screen) {
 		gameScr = screen;
@@ -65,7 +43,24 @@ public class Invaders {
 			}
 		}
 	}
+	
+	public boolean getDeaths() {
+		if (deaths == 21) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
+	public void incrementDeaths() {
+		deaths++;
+	}
+	
+	public ArrayList<GImage> getInvaders() {
+		return invaders;
+	}
+	
 	public void Move() {
 		
 		int dx = (moveRange > 1) ? 5 : -5;
@@ -136,24 +131,7 @@ public class Invaders {
 		return reachedBound;
 	}
 
-	
-	public void removeInv(double x, double y) {
-		for (int i = 0; i < invaders.size(); i++) {
-			if (invaders.get(i).getX() == x && invaders.get(i).getY() == y && invaders.get(i).isVisible()) {
-				gameScr.remove(invaders.get(i));
-				invaders.remove(i);
-				return;
-			}
-		}
-	}
 
-	public boolean checkCollisions() {
-		for (GImage inv : getInvaders()) {
-			if (inv.getY() == 420) {
-				return true;
-			}
-		}
-		return false;
-	}}
+	}
 
 	//comment
